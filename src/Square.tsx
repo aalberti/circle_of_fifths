@@ -10,22 +10,20 @@ export interface SquareProps {
     text: string,
 }
 
-class Square extends React.Component<SquareProps> {
-    render() {
-        const css = this.props.css;
-        console.log(this.props.text);
-        return (
-            <div
-                className="square"
-                style={{
-                    transform:
-                        `rotate(${css.rotate}deg) translate(${css.radius}px) rotate(${-css.rotate}deg)`
-                }}
-            >
-                {this.props.text}
-            </div>
-        );
-    }
-}
+const Square = (props: SquareProps) => {
+    const css = props.css;
+    console.log(props.text);
+    return (
+        <div
+            className="square"
+            style={{
+                transform:
+                    `translate(-50%, -50%) rotate(${css.rotate}deg) translate(${css.radius}px) rotate(${-css.rotate}deg)`
+            }}
+        >
+            {props.text}
+        </div>
+    );
+};
 
 export default Square;

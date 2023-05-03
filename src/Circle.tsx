@@ -1,17 +1,23 @@
 import Square, {SquareProps} from "./Square";
-import React from "react";
+import React, {useState, useRef} from "react";
 
-
-class Circle extends React.Component {
-    state: { square: SquareProps[] } = {
-        square: []
-    };
-
-    buildCircle = () => {
-        const numberOfSquares = 12; //Number of Square to be generate
+interface CircleProps {
+    squares:SquareProps[]
+}
+const Circle = () => {
+    const myself = useRef<HTMLDivElement>(null);
+    const [state, setState] = useState<CircleProps>({
+        squares: []
+    });
+    const buildCircle = () => {
+        const numberOfSquares = 12;
         const type = 1;
-        let radius = 100; //distance from center
-        let start = -90; //shift start from 0
+        let radius: number;
+        if (myself.current == null)
+            radius = 100;
+        else
+            radius = myself.current.clientWidth / 2;
+        let start = -90;
         let slice = (360 * type) / numberOfSquares;
 
         let squares = [];
@@ -23,7 +29,7 @@ class Circle extends React.Component {
                     radius: radius,
                     rotate: rotate,
                 },
-                text: i
+                text: `${i}`
             });
             squares.push({
                 css: {
@@ -33,21 +39,19 @@ class Circle extends React.Component {
                 text: `${i}m`
             });
         }
-        this.setState({square: squares});
+        setState({squares: squares});
     };
 
-    render() {
-        return (
-            <div>
-                <div className="circle">
-                    <div className="circle-hold">
-                        {this.state.square.map(value => <Square css={value.css} text={value.text}/>)}
-                    </div>
+    return (
+        <div ref={myself}>
+            <div className="circle">
+                <div className="circle-hold" style={{position: "absolute", left: "50%", top: "50%"}}>
+                    {state.squares.map(value => <Square css={value.css} text={value.text}/>)}
                 </div>
-                <button onClick={this.buildCircle}>Show Square</button>
             </div>
-        );
-    }
+            <button onClick={buildCircle}>Show Square</button>
+        </div>
+    );
 }
 
 export default Circle;
