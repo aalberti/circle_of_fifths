@@ -13,7 +13,7 @@ code {
 }
 
 .circle {
-  background: orange;
+  background: white;
   width: 200px;
   height: 200px;
   border-radius: 50%;
@@ -40,4 +40,5 @@ code {
   /* border-radius: 50%; */
   color: white;
   left: 0;
+  font-size: small;
 }

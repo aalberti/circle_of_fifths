@@ -7,13 +7,13 @@ interface CssProps {
 
 export interface SquareProps {
     css: CssProps,
-    num: number,
+    text: string,
 }
 
 class Square extends React.Component<SquareProps> {
     render() {
         const css = this.props.css;
-        console.log(this.props.num);
+        console.log(this.props.text);
         return (
             <div
                 className="square"
@@ -22,7 +22,7 @@ class Square extends React.Component<SquareProps> {
                         `rotate(${css.rotate}deg) translate(${css.radius}px) rotate(${-css.rotate}deg)`
                 }}
             >
-                {this.props.num}
+                {this.props.text}
             </div>
         );
     }
