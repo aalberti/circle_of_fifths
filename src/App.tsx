@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Musicologist} from "./Musicologist";
+import {Musicologist} from "./fifths/Musicologist";
 
 function App() {
     return <div className="App">
