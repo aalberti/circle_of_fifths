@@ -47,19 +47,17 @@ const Circle: FC<CircleProps> = ({onChordSelected}) => {
         setState({squares: squares});
     };
 
-    return (
-        <div ref={myself}>
-            <div className="circle">
-                <div className="circle-hold" style={{position: "absolute", left: "50%", top: "50%"}}>
-                    {state.squares.map(value => <Square
-                        css={value.css} text={value.text}
-                        onClick={text => onChordSelected(text)}
-                    />)}
-                </div>
+    return <div ref={myself}>
+        <div className="circle">
+            <div className="circle-hold" style={{position: "absolute", left: "50%", top: "50%"}}>
+                {state.squares.map(value => <Square
+                    css={value.css} text={value.text}
+                    onClick={text => onChordSelected(text)}
+                />)}
             </div>
-            <button onClick={buildCircle}>Show Square</button>
         </div>
-    );
+        <button onClick={buildCircle}>Show Square</button>
+    </div>;
 }
 
 export default Circle;
