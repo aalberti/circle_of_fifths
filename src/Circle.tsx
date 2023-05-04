@@ -1,9 +1,6 @@
 import Square, {SquareProps} from "./Square";
-import React, {useState, useRef, FC} from "react";
-
-interface Squares {
-    squares: SquareProps[]
-}
+import React, {FC, useRef} from "react";
+import './Musicologist.css'
 
 interface CircleProps {
     onChordSelected: (chordName: string) => void;
@@ -11,53 +8,41 @@ interface CircleProps {
 
 const Circle: FC<CircleProps> = ({onChordSelected}) => {
     const myself = useRef<HTMLDivElement>(null);
-    const [state, setState] = useState<Squares>({
-        squares: []
-    });
-    const buildCircle = () => {
-        const numberOfSquares = 12;
-        const type = 1;
-        let radius: number;
-        if (myself.current == null)
-            radius = 100;
-        else
-            radius = myself.current.clientWidth / 2;
-        let start = -90;
-        let slice = (360 * type) / numberOfSquares;
-
-        let squares = [];
-        let i;
-        for (i = 0; i < numberOfSquares; i++) {
-            let rotate = slice * i + start;
-            squares.push({
-                css: {
-                    radius: radius,
-                    rotate: rotate,
-                },
-                text: `${i}`
-            });
-            squares.push({
-                css: {
-                    radius: radius / 2,
-                    rotate: rotate,
-                },
-                text: `${i}m`
-            });
-        }
-        setState({squares: squares});
-    };
+    let radius: number = myself.current == null ? 100 : myself.current.clientWidth / 2;
 
     return <div ref={myself}>
         <div className="circle">
             <div className="circle-hold" style={{position: "absolute", left: "50%", top: "50%"}}>
-                {state.squares.map(value => <Square
+                {squares(radius).map(value => <Square
                     css={value.css} text={value.text}
                     onClick={text => onChordSelected(text)}
                 />)}
             </div>
         </div>
-        <button onClick={buildCircle}>Show Square</button>
     </div>;
+}
+
+function squares(radius: number): SquareProps[] {
+    const numberOfSquares = 12;
+    let slice = 360 / numberOfSquares;
+
+    return Array(12).fill(0)
+        .map((_, i) => slice * i - 90)
+        .flatMap((rotation, i) => [
+            {
+                css: {
+                    radius: radius,
+                    rotate: rotation,
+                },
+                text: `${i}`
+            }, {
+                css: {
+                    radius: radius / 2,
+                    rotate: rotation,
+                },
+                text: `${i}m`
+            }
+        ]);
 }
 
 export default Circle;

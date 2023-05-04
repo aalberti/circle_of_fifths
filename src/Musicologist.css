@@ -1,0 +1,21 @@
+.circle {
+    background: white;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    margin: 40px auto 40px;
+    position: relative;
+}
+
+.square {
+    position: absolute;
+    background: red;
+    min-width: 50px;
+    min-height: 30px;
+    color: white;
+    font-size: small;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center
+}

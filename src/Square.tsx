@@ -1,4 +1,5 @@
 import React, {FC} from "react";
+import './Musicologist.css'
 
 interface CssProps {
     rotate: number,
