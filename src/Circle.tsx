@@ -1,12 +1,12 @@
 import Square, {SquareProps} from "./Square";
 import React, {useState, useRef} from "react";
 
-interface CircleProps {
+interface Squares {
     squares:SquareProps[]
 }
 const Circle = () => {
     const myself = useRef<HTMLDivElement>(null);
-    const [state, setState] = useState<CircleProps>({
+    const [state, setState] = useState<Squares>({
         squares: []
     });
     const buildCircle = () => {

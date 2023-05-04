@@ -21,7 +21,9 @@ const Square = (props: SquareProps) => {
                     `translate(-50%, -50%) rotate(${css.rotate}deg) translate(${css.radius}px) rotate(${-css.rotate}deg)`
             }}
         >
-            {props.text}
+            <div style={{verticalAlign:"middle"}}>
+                {props.text}
+            </div>
         </div>
     );
 };

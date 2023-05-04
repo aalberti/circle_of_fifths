@@ -1,37 +1,35 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 .circle {
-  background: white;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  margin: 40px auto 40px;
-  position: relative;
-  /* top: 200px; left: 200px; for example purposes only */
+    background: white;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    margin: 40px auto 40px;
+    position: relative;
 }
 
 .square {
-  position: absolute;
-  background: red;
-  -webkit-transition: all 2s linear;
-  -moz-transition: all 2s linear;
-  transition: transform 2s linear;
-  width: 20px;
-  height: 20px;
-  /* border-radius: 50%; */
-  color: white;
-  left: 0;
-  font-size: small;
+    position: absolute;
+    background: red;
+    min-width: 50px;
+    min-height: 30px;
+    color: white;
+    font-size: small;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center
 }
