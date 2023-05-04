@@ -1,9 +1,15 @@
+.musicologist {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
 .circle {
     background: white;
     width: 500px;
     height: 500px;
     border-radius: 50%;
-    margin: 40px auto 40px;
+    margin: 40px;
     position: relative;
 }
 

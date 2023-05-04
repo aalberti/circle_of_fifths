@@ -10,14 +10,12 @@ const Circle: FC<CircleProps> = ({onChordSelected}) => {
     const myself = useRef<HTMLDivElement>(null);
     let radius: number = myself.current == null ? 100 : myself.current.clientWidth / 2;
 
-    return <div ref={myself}>
-        <div className="circle">
-            <div className="circle-hold" style={{position: "absolute", left: "50%", top: "50%"}}>
-                {squares(radius).map(value => <Square
-                    css={value.css} text={value.text}
-                    onClick={text => onChordSelected(text)}
-                />)}
-            </div>
+    return <div className="circle" ref={myself}>
+        <div className="circle-hold" style={{position: "absolute", left: "50%", top: "50%"}}>
+            {squares(radius).map(value => <Square
+                css={value.css} text={value.text}
+                onClick={text => onChordSelected(text)}
+            />)}
         </div>
     </div>;
 }

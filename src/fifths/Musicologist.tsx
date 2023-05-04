@@ -4,8 +4,8 @@ import './Musicologist.css'
 
 export function Musicologist() {
     const [chord, setChord] = useState<string>("");
-    return <>
-        {chord}
+    return <div className="musicologist">
         <Circle onChordSelected={setChord}/>
-    </>;
+        {chord}
+    </div>;
 }
