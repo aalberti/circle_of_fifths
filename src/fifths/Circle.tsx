@@ -11,8 +11,8 @@ const Circle: FC<CircleProps> = ({onChordSelected}) => {
     let radius: number = myself.current == null ? 100 : myself.current.clientWidth / 2;
 
     return <div className="circle" ref={myself}>
-        <div className="circle-hold" style={{position: "absolute", left: "50%", top: "50%"}}>
-            {chords(radius).map(chord => <ChordBox
+        <div style={{position: "absolute", left: "50%", top: "50%"}}>
+            {chordBoxes(radius).map(chord => <ChordBox
                 radial={chord.radial} name={chord.name}
                 onClick={text => onChordSelected(text)}
             />)}
@@ -20,25 +20,37 @@ const Circle: FC<CircleProps> = ({onChordSelected}) => {
     </div>;
 }
 
-function chords(radius: number): ChordBoxProps[] {
-    const numberOfChords = 12;
-    let slice = 360 / numberOfChords;
+function chordBoxes(radius: number): ChordBoxProps[] {
+    const chords = [
+        {major: "C", minor: "Am"},
+        {major: "G", minor: "Em"},
+        {major: "D", minor: "Bm"},
+        {major: "A", minor: "F#m"},
+        {major: "E", minor: "Dbm"},
+        {major: "B", minor: "Abm"},
+        {major: "Db", minor: "Bbm"},
+        {major: "Ab", minor: "Fm"},
+        {major: "Eb", minor: "Cm"},
+        {major: "Bb", minor: "Gm"},
+        {major: "F", minor: "Dm"},
+    ]
+    let slice = 360 / chords.length;
 
-    return Array(12).fill(0)
-        .map((_, i) => slice * i - 90)
-        .flatMap((rotation, i) => [
+    return chords
+        .map((chord, i) => {return {chord:chord, rotation: slice * i - 90}})
+        .flatMap(slice => [
             {
                 radial: {
                     radius: radius,
-                    rotation: rotation,
+                    rotation: slice.rotation,
                 },
-                name: `${i}`
+                name: slice.chord.major
             }, {
                 radial: {
                     radius: radius / 2,
-                    rotation: rotation,
+                    rotation: slice.rotation,
                 },
-                name: `${i}m`
+                name: slice.chord.minor
             }
         ]);
 }
