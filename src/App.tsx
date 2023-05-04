@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
-import Circle from "./Circle";
+import {Musicologist} from "./Musicologist";
 
 function App() {
-    const [chord, setChord] = useState<string>("");
     return (
         <div className="App">
             <header className="App-header">
-                {chord}
-                <Circle onChordSelected={chord => setChord(chord)}/>
+                <Musicologist/>
             </header>
         </div>
     );
