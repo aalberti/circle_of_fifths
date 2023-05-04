@@ -1,4 +1,4 @@
-import Square, {SquareProps} from "./Square";
+import ChordBox, {ChordBoxProps} from "./ChordBox";
 import React, {FC, useRef} from "react";
 import './Musicologist.css'
 
@@ -12,33 +12,33 @@ const Circle: FC<CircleProps> = ({onChordSelected}) => {
 
     return <div className="circle" ref={myself}>
         <div className="circle-hold" style={{position: "absolute", left: "50%", top: "50%"}}>
-            {squares(radius).map(value => <Square
-                css={value.css} text={value.text}
+            {chords(radius).map(chord => <ChordBox
+                radial={chord.radial} name={chord.name}
                 onClick={text => onChordSelected(text)}
             />)}
         </div>
     </div>;
 }
 
-function squares(radius: number): SquareProps[] {
-    const numberOfSquares = 12;
-    let slice = 360 / numberOfSquares;
+function chords(radius: number): ChordBoxProps[] {
+    const numberOfChords = 12;
+    let slice = 360 / numberOfChords;
 
     return Array(12).fill(0)
         .map((_, i) => slice * i - 90)
         .flatMap((rotation, i) => [
             {
-                css: {
+                radial: {
                     radius: radius,
-                    rotate: rotation,
+                    rotation: rotation,
                 },
-                text: `${i}`
+                name: `${i}`
             }, {
-                css: {
+                radial: {
                     radius: radius / 2,
-                    rotate: rotation,
+                    rotation: rotation,
                 },
-                text: `${i}m`
+                name: `${i}m`
             }
         ]);
 }
