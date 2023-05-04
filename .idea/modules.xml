@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../fifth_cycle.iml" filepath="$PROJECT_DIR$/../fifth_cycle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/circle_of_fifths.iml" filepath="$PROJECT_DIR$/.idea/circle_of_fifths.iml" />
     </modules>
   </component>
 </project>

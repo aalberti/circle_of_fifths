@@ -1,10 +1,15 @@
 import Square, {SquareProps} from "./Square";
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, FC} from "react";
 
 interface Squares {
-    squares:SquareProps[]
+    squares: SquareProps[]
 }
-const Circle = () => {
+
+interface CircleProps {
+    onChordSelected: (chordName: string) => void;
+}
+
+const Circle: FC<CircleProps> = ({onChordSelected}) => {
     const myself = useRef<HTMLDivElement>(null);
     const [state, setState] = useState<Squares>({
         squares: []
@@ -46,7 +51,10 @@ const Circle = () => {
         <div ref={myself}>
             <div className="circle">
                 <div className="circle-hold" style={{position: "absolute", left: "50%", top: "50%"}}>
-                    {state.squares.map(value => <Square css={value.css} text={value.text}/>)}
+                    {state.squares.map(value => <Square
+                        css={value.css} text={value.text}
+                        onClick={text => onChordSelected(text)}
+                    />)}
                 </div>
             </div>
             <button onClick={buildCircle}>Show Square</button>
