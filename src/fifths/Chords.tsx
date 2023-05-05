@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import './Musicologist.css'
-import keyboard from './keyboard_double_octave.png';
+import Keyboard from "./keyboard/Keyboard";
 
 interface ChordsProps {
     chordName: string
@@ -9,7 +9,7 @@ interface ChordsProps {
 const Chords:FC<ChordsProps> = ({chordName}) => {
     return <div className="chords">
         {chordName}
-        <img className="keyboard" src={keyboard}></img>
+        <Keyboard chordName={chordName}/>
     </div>
 }
 
