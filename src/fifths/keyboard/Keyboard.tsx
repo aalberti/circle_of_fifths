@@ -1,5 +1,5 @@
 import keyboard from "./keyboard_double_octave.png";
-import React, {FC} from "react";
+import React, {FC, useRef} from "react";
 import "./Keyboard.css"
 import KeyboardPositions from "./KeyboardPositions";
 
@@ -8,6 +8,7 @@ interface KeyboardProps {
 }
 
 const Keyboard: FC<KeyboardProps> = ({chordName}) => {
+    const imageRef = useRef<HTMLImageElement>(null)
     const keys = [
         {key: "C", octave: 0},
         {key: "Db", octave: 0},
@@ -34,9 +35,11 @@ const Keyboard: FC<KeyboardProps> = ({chordName}) => {
         {key: "Bb", octave: 1},
         {key: "B", octave: 1},
     ]
-    const positions = new KeyboardPositions(300, 100);
+    const width = imageRef.current == null ? 300 : imageRef.current.clientWidth
+    const height = imageRef.current == null ? 100 : imageRef.current.clientHeight
+    const positions = new KeyboardPositions(width, height);
     return <div style={{position: "relative"}}>
-        <img className="keyboard" src={keyboard} alt={`${chordName} on keyboard`}/>
+        <img ref={imageRef} className="keyboard" src={keyboard} alt={`${chordName} on keyboard`}/>
         {keys
             .map(({key, octave}) => positions.keyPosition(key, octave))
             .map(({x, y}) => <div style={{
