@@ -33,13 +33,20 @@ describe('keyboard positions', () => {
 })
 
 describe("guess octaves", () => {
-    it("on first octave only", () => {
-        expect(new KeyboardPositions(0, 0).onOctaves(["C", "D"]))
+    const positions = new KeyboardPositions(0, 0);
+    test("on first octave only", () => {
+        expect(positions.onOctaves(["C", "D"]))
             .toEqual([{key: "C", octave: 0}, {key: "D", octave: 0}])
     })
 
-    it("on 2 octaves", () => {
-        expect(new KeyboardPositions(0, 0).onOctaves(["B", "C"]))
+    test("on 2 octaves", () => {
+        expect(positions.onOctaves(["B", "C"]))
             .toEqual([{key: "B", octave: 0}, {key: "C", octave: 1}])
     })
+})
+
+test("positions for a chord", () => {
+    const keyboard = new KeyboardPositions(300, 100);
+    expect(keyboard.keysPositions(["F#", "A", "Db"]))
+        .toEqual([{x: 86, y: 61}, {x: 118, y: 90}, {x: 171, y: 61}])
 })

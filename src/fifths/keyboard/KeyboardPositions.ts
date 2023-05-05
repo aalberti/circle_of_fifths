@@ -9,6 +9,9 @@ class KeyboardPositions {
         public readonly keyboardHeight: number) {
     }
 
+    keysPositions = (notes: string[]) => this.onOctaves(notes)
+        .map(({key, octave}) => this.keyPosition(key, octave));
+
     static keys = ["C", "Db", "D", "Eb", "E", "", "F", "F#", "G", "Ab", "A", "Bb", "B"]
 
     keyPosition = (key: string, octaveIndex: number): Position => {
@@ -21,7 +24,7 @@ class KeyboardPositions {
         return {x: x, y: y}
     };
 
-    onOctaves(notes: string[]): { key: string, octave: number }[] {
+    onOctaves = (notes: string[]): { key: string, octave: number }[] => {
         let currentOctave = 0;
         let lastKeyIndex = 0;
         let result = []
@@ -33,7 +36,7 @@ class KeyboardPositions {
             lastKeyIndex = keyIndex;
         }
         return result;
-    }
+    };
 }
 
 export default KeyboardPositions
