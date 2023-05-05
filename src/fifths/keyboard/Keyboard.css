@@ -1,4 +1,11 @@
-.keyboard {
+.keyboardImage {
     width: 300px;
     height: 100px;
+}
+
+.keyPressed {
+    width: 8px;
+    height: 8px;
+    background: blue;
+    border-radius: 50%
 }

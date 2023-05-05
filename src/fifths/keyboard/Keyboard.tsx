@@ -39,18 +39,14 @@ const Keyboard: FC<KeyboardProps> = ({chordName}) => {
     const height = imageRef.current == null ? 100 : imageRef.current.clientHeight
     const positions = new KeyboardPositions(width, height);
     return <div style={{position: "relative"}}>
-        <img ref={imageRef} className="keyboard" src={keyboard} alt={`${chordName} on keyboard`}/>
+        <img ref={imageRef} className="keyboardImage" src={keyboard} alt={`${chordName} on keyboard`}/>
         {keys
             .map(({key, octave}) => positions.keyPosition(key, octave))
-            .map(({x, y}) => <div style={{
+            .map(({x, y}) => <div className="keyPressed" style={{
                 transform: "translate(-50%, -50%)",
                 position: "absolute",
                 top: `${y}px`,
                 left: `${x}px`,
-                width: "8px",
-                height: "8px",
-                background: "blue",
-                borderRadius: "50%"
             }}/>)
         }
     </div>;
