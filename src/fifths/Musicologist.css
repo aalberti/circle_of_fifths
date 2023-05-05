@@ -1,7 +1,7 @@
 .musicologist {
     display: flex;
     flex-flow: row;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .circle {
@@ -28,6 +28,10 @@
 
 .chords {
     display: flex;
-    flex-flow: column;
-    align-items: flex-start;
+    flex-flow: row;
+    align-items: center;
+}
+
+.chordName {
+    width: 100px
 }

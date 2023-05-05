@@ -6,13 +6,13 @@ interface ChordsProps {
     chordName: string
 }
 
-const Chords:FC<ChordsProps> = ({chordName}) => {
+const Chords: FC<ChordsProps> = ({chordName}) => {
     const keys = [
         "C", "Db", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B",
         "C", "Db", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B",
     ]
     return <div className="chords">
-        {chordName}
+        <div className="chordName">{chordName}</div>
         <Keyboard notes={keys}/>
     </div>
 }
