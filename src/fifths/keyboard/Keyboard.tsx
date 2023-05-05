@@ -9,38 +9,12 @@ interface KeyboardProps {
 
 const Keyboard: FC<KeyboardProps> = ({notes}) => {
     const imageRef = useRef<HTMLImageElement>(null)
-    const keys = [
-        "C",
-        "Db",
-        "D",
-        "Eb",
-        "E",
-        "F",
-        "F#",
-        "G",
-        "Ab",
-        "A",
-        "Bb",
-        "B",
-        "C",
-        "Db",
-        "D",
-        "Eb",
-        "E",
-        "F",
-        "F#",
-        "G",
-        "Ab",
-        "A",
-        "Bb",
-        "B",
-    ]
     const width = imageRef.current == null ? 300 : imageRef.current.clientWidth
     const height = imageRef.current == null ? 100 : imageRef.current.clientHeight
     const keyboard = new KeyboardPositions(width, height);
     return <div style={{position: "relative"}}>
         <img ref={imageRef} className="keyboardImage" src={keyboardImage} alt={`${notes} on keyboard`}/>
-        {keyboard.onOctaves(keys)
+        {keyboard.onOctaves(notes)
             .map(({key, octave}) => keyboard.keyPosition(key, octave))
             .map(({x, y}) => <div className="keyPressed" style={{
                 transform: "translate(-50%, -50%)",
