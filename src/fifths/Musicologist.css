@@ -1,7 +1,7 @@
 .musicologist {
     display: flex;
     flex-flow: row;
-    align-items: center;
+    align-items: start;
 }
 
 .circle {
@@ -24,4 +24,15 @@
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center
+}
+
+.chords {
+    display: flex;
+    flex-flow: column;
+    align-items: start;
+}
+
+.keyboard {
+    width: 300px;
+    height: 100px;
 }
