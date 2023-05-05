@@ -1,47 +1,47 @@
-import keyboard from "./keyboard_double_octave.png";
+import keyboardImage from "./keyboard_double_octave.png";
 import React, {FC, useRef} from "react";
 import "./Keyboard.css"
 import KeyboardPositions from "./KeyboardPositions";
 
 interface KeyboardProps {
-    chordName: string
+    notes: string[]
 }
 
-const Keyboard: FC<KeyboardProps> = ({chordName}) => {
+const Keyboard: FC<KeyboardProps> = ({notes}) => {
     const imageRef = useRef<HTMLImageElement>(null)
     const keys = [
-        {key: "C", octave: 0},
-        {key: "Db", octave: 0},
-        {key: "D", octave: 0},
-        {key: "Eb", octave: 0},
-        {key: "E", octave: 0},
-        {key: "F", octave: 0},
-        {key: "F#", octave: 0},
-        {key: "G", octave: 0},
-        {key: "Ab", octave: 0},
-        {key: "A", octave: 0},
-        {key: "Bb", octave: 0},
-        {key: "B", octave: 0},
-        {key: "C", octave: 1},
-        {key: "Db", octave: 1},
-        {key: "D", octave: 1},
-        {key: "Eb", octave: 1},
-        {key: "E", octave: 1},
-        {key: "F", octave: 1},
-        {key: "F#", octave: 1},
-        {key: "G", octave: 1},
-        {key: "Ab", octave: 1},
-        {key: "A", octave: 1},
-        {key: "Bb", octave: 1},
-        {key: "B", octave: 1},
+        "C",
+        "Db",
+        "D",
+        "Eb",
+        "E",
+        "F",
+        "F#",
+        "G",
+        "Ab",
+        "A",
+        "Bb",
+        "B",
+        "C",
+        "Db",
+        "D",
+        "Eb",
+        "E",
+        "F",
+        "F#",
+        "G",
+        "Ab",
+        "A",
+        "Bb",
+        "B",
     ]
     const width = imageRef.current == null ? 300 : imageRef.current.clientWidth
     const height = imageRef.current == null ? 100 : imageRef.current.clientHeight
-    const positions = new KeyboardPositions(width, height);
+    const keyboard = new KeyboardPositions(width, height);
     return <div style={{position: "relative"}}>
-        <img ref={imageRef} className="keyboardImage" src={keyboard} alt={`${chordName} on keyboard`}/>
-        {keys
-            .map(({key, octave}) => positions.keyPosition(key, octave))
+        <img ref={imageRef} className="keyboardImage" src={keyboardImage} alt={`${notes} on keyboard`}/>
+        {keyboard.onOctaves(keys)
+            .map(({key, octave}) => keyboard.keyPosition(key, octave))
             .map(({x, y}) => <div className="keyPressed" style={{
                 transform: "translate(-50%, -50%)",
                 position: "absolute",

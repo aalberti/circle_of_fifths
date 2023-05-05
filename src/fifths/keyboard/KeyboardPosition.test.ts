@@ -2,7 +2,7 @@ import KeyboardPositions, {Position} from "./KeyboardPositions";
 
 describe('keyboard positions', () => {
     const positions = new KeyboardPositions(300, 100);
-    it.each([
+    test.each([
         ["C", 0, {x: 11, y: 90}],
         ["D", 0, {x: 32, y: 90}],
         ["E", 0, {x: 54, y: 90}],
@@ -29,5 +29,17 @@ describe('keyboard positions', () => {
         ["Bb", 1, {x: 279, y: 61}],
     ])('%s position in octave %d is %s', (key: string, octaveIndex: number, position: Position) => {
         expect(positions.keyPosition(key, octaveIndex)).toEqual(position)
+    })
+})
+
+describe("guess octaves", () => {
+    it("on first octave only", () => {
+        expect(new KeyboardPositions(0, 0).onOctaves(["C", "D"]))
+            .toEqual([{key: "C", octave: 0}, {key: "D", octave: 0}])
+    })
+
+    it("on 2 octaves", () => {
+        expect(new KeyboardPositions(0, 0).onOctaves(["B", "C"]))
+            .toEqual([{key: "B", octave: 0}, {key: "C", octave: 1}])
     })
 })

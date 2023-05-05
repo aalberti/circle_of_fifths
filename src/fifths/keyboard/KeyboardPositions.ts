@@ -1,6 +1,6 @@
 export interface Position {
-    x: number,
-    y: number
+    x: number;
+    y: number;
 }
 
 class KeyboardPositions {
@@ -20,6 +20,20 @@ class KeyboardPositions {
         const y = Math.round(this.keyboardHeight * (key.length == 1 ? 0.9 : 0.61));
         return {x: x, y: y}
     };
+
+    onOctaves(notes: string[]): { key: string, octave: number }[] {
+        let currentOctave = 0;
+        let lastKeyIndex = 0;
+        let result = []
+        for (const note of notes) {
+            const keyIndex = KeyboardPositions.keys.indexOf(note);
+            if (keyIndex < lastKeyIndex)
+                currentOctave++;
+            result.push({key: note, octave: currentOctave});
+            lastKeyIndex = keyIndex;
+        }
+        return result;
+    }
 }
 
 export default KeyboardPositions

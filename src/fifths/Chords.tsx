@@ -9,7 +9,7 @@ interface ChordsProps {
 const Chords:FC<ChordsProps> = ({chordName}) => {
     return <div className="chords">
         {chordName}
-        <Keyboard chordName={chordName}/>
+        <Keyboard notes={[chordName]}/>
     </div>
 }
 
