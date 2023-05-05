@@ -14,7 +14,7 @@ class KeyboardPositions {
 
     static keys = ["C", "Db", "D", "Eb", "E", "", "F", "F#", "G", "Ab", "A", "Bb", "B"]
 
-    keyPosition = (key: string, octaveIndex: number): Position => {
+    private keyPosition = (key: string, octaveIndex: number): Position => {
         let interval = this.keyboardWidth / 28;
         let octaveOffset = this.keyboardWidth / 2 * octaveIndex;
         let keyIndex = KeyboardPositions.keys.indexOf(key);
@@ -26,11 +26,11 @@ class KeyboardPositions {
 
     onOctaves = (notes: string[]): { key: string, octave: number }[] => {
         let currentOctave = 0;
-        let lastKeyIndex = 0;
+        let lastKeyIndex = -1;
         let result = []
         for (const note of notes) {
             const keyIndex = KeyboardPositions.keys.indexOf(note);
-            if (keyIndex < lastKeyIndex)
+            if (keyIndex <= lastKeyIndex)
                 currentOctave++;
             result.push({key: note, octave: currentOctave});
             lastKeyIndex = keyIndex;

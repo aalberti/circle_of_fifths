@@ -3,32 +3,32 @@ import KeyboardPositions, {Position} from "./KeyboardPositions";
 describe('keyboard positions', () => {
     const positions = new KeyboardPositions(300, 100);
     test.each([
-        ["C", 0, {x: 11, y: 90}],
-        ["D", 0, {x: 32, y: 90}],
-        ["E", 0, {x: 54, y: 90}],
-        ["F", 0, {x: 75, y: 90}],
-        ["G", 0, {x: 96, y: 90}],
-        ["A", 0, {x: 118, y: 90}],
-        ["B", 0, {x: 139, y: 90}],
-        ["C", 1, {x: 161, y: 90}],
-        ["D", 1, {x: 182, y: 90}],
-        ["E", 1, {x: 204, y: 90}],
-        ["F", 1, {x: 225, y: 90}],
-        ["G", 1, {x: 246, y: 90}],
-        ["A", 1, {x: 268, y: 90}],
-        ["B", 1, {x: 289, y: 90}],
-        ["Db", 0, {x: 21, y: 61}],
-        ["Eb", 0, {x: 43, y: 61}],
-        ["F#", 0, {x: 86, y: 61}],
-        ["Ab", 0, {x: 107, y: 61}],
-        ["Bb", 0, {x: 129, y: 61}],
-        ["Db", 1, {x: 171, y: 61}],
-        ["Eb", 1, {x: 193, y: 61}],
-        ["F#", 1, {x: 236, y: 61}],
-        ["Ab", 1, {x: 257, y: 61}],
-        ["Bb", 1, {x: 279, y: 61}],
-    ])('%s position in octave %d is %s', (key: string, octaveIndex: number, position: Position) => {
-        expect(positions.keyPosition(key, octaveIndex)).toEqual(position)
+        [["C"], {x: 11, y: 90}],
+        [["D"], {x: 32, y: 90}],
+        [["E"], {x: 54, y: 90}],
+        [["F"], {x: 75, y: 90}],
+        [["G"], {x: 96, y: 90}],
+        [["A"], {x: 118, y: 90}],
+        [["B"], {x: 139, y: 90}],
+        [["B", "C"], {x: 161, y: 90}],
+        [["B", "D"], {x: 182, y: 90}],
+        [["B", "E"], {x: 204, y: 90}],
+        [["B", "F"], {x: 225, y: 90}],
+        [["B", "G"], {x: 246, y: 90}],
+        [["B", "A"], {x: 268, y: 90}],
+        [["B", "B"], {x: 289, y: 90}],
+        [["Db"], {x: 21, y: 61}],
+        [["Eb"], {x: 43, y: 61}],
+        [["F#"], {x: 86, y: 61}],
+        [["Ab"], {x: 107, y: 61}],
+        [["Bb"], {x: 129, y: 61}],
+        [["B", "Db"], {x: 171, y: 61}],
+        [["B", "Eb"], {x: 193, y: 61}],
+        [["B", "F#"], {x: 236, y: 61}],
+        [["B", "Ab"], {x: 257, y: 61}],
+        [["B", "Bb"], {x: 279, y: 61}],
+    ])('%s highest position is %s', (key: string[], position: Position) => {
+        expect(positions.keysPositions(key).at(-1)).toEqual(position)
     })
 })
 
@@ -42,6 +42,11 @@ describe("guess octaves", () => {
     test("on 2 octaves", () => {
         expect(positions.onOctaves(["B", "C"]))
             .toEqual([{key: "B", octave: 0}, {key: "C", octave: 1}])
+    })
+
+    test("for same note on 2 octaves", () => {
+        expect(positions.onOctaves(["B", "B"]))
+            .toEqual([{key: "B", octave: 0}, {key: "B", octave: 1}])
     })
 })
 
