@@ -1,24 +1,43 @@
 export class Chord {
     readonly name: string;
+
     constructor(name: string) {
         this.name = name;
     }
 
-    private root = () => new Note(this.name)
+    private root() {
+        let rootName: string;
+        rootName = this.isMinor() ? this.name.slice(0, -1) : this.name;
+        return new Note(rootName);
+    }
 
-    notes = (): Note[] => [this.root(), this.root().third(), this.root().fifth()]
+    private isMinor() {
+        return this.name.endsWith("m");
+    }
+
+    notes(): Note[] {
+        if (this.isMinor())
+            return [this.root(), this.root().flatThird(), this.root().fifth()];
+        else
+            return [this.root(), this.root().third(), this.root().fifth()];
+    }
 }
 
 const octave = ["C", "Db", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"]
 
 export class Note {
     readonly name: string;
+
     constructor(name: string) {
         this.name = name;
     }
 
     third() {
         return this.plusSemitones(4)
+    }
+
+    flatThird() {
+        return this.plusSemitones(3)
     }
 
     fifth() {
