@@ -1,4 +1,5 @@
 import KeyboardPositions, {Position} from "./KeyboardPositions";
+import {Note} from "../chords/MusicTheory";
 
 describe('keyboard positions', () => {
     const positions = new KeyboardPositions(300, 100);
@@ -27,31 +28,33 @@ describe('keyboard positions', () => {
         [["B", "F#"], {x: 236, y: 61}],
         [["B", "Ab"], {x: 257, y: 61}],
         [["B", "Bb"], {x: 279, y: 61}],
-    ])('%s highest position is %s', (key: string[], position: Position) => {
-        expect(positions.keysPositions(key).at(-1)).toEqual(position)
+    ])('%s highest position is %s', (notes: string[], position: Position) => {
+        expect(positions.keysPositions(toNotes(notes)).at(-1)).toEqual(position)
     })
 })
 
 describe("guess octaves", () => {
     const positions = new KeyboardPositions(0, 0);
     test("on first octave only", () => {
-        expect(positions.onOctaves(["C", "D"]))
+        expect(positions.onOctaves(toNotes(["C", "D"])))
             .toEqual([{key: "C", octave: 0}, {key: "D", octave: 0}])
     })
 
     test("on 2 octaves", () => {
-        expect(positions.onOctaves(["B", "C"]))
+        expect(positions.onOctaves(toNotes(["B", "C"])))
             .toEqual([{key: "B", octave: 0}, {key: "C", octave: 1}])
     })
 
     test("for same note on 2 octaves", () => {
-        expect(positions.onOctaves(["B", "B"]))
+        expect(positions.onOctaves(toNotes(["B", "B"])))
             .toEqual([{key: "B", octave: 0}, {key: "B", octave: 1}])
     })
 })
 
 test("positions for a chord", () => {
     const keyboard = new KeyboardPositions(300, 100);
-    expect(keyboard.keysPositions(["F#", "A", "Db"]))
+    expect(keyboard.keysPositions(toNotes(["F#", "A", "Db"])))
         .toEqual([{x: 86, y: 61}, {x: 118, y: 90}, {x: 171, y: 61}])
 })
+
+const toNotes = (names: string[]) => names.map(name => new Note(name))

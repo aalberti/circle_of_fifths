@@ -1,3 +1,5 @@
+import {Note} from "../chords/MusicTheory";
+
 export interface Position {
     x: number;
     y: number;
@@ -9,7 +11,7 @@ class KeyboardPositions {
         public readonly keyboardHeight: number) {
     }
 
-    keysPositions = (notes: string[]) => this.onOctaves(notes)
+    keysPositions = (notes: Note[]) => this.onOctaves(notes)
         .map(({key, octave}) => this.keyPosition(key, octave));
 
     static keys = ["C", "Db", "D", "Eb", "E", "", "F", "F#", "G", "Ab", "A", "Bb", "B"]
@@ -24,15 +26,15 @@ class KeyboardPositions {
         return {x: x, y: y}
     };
 
-    onOctaves = (notes: string[]): { key: string, octave: number }[] => {
+    onOctaves = (notes: Note[]): { key: string, octave: number }[] => {
         let currentOctave = 0;
         let lastKeyIndex = -1;
         let result = []
         for (const note of notes) {
-            const keyIndex = KeyboardPositions.keys.indexOf(note);
+            const keyIndex = KeyboardPositions.keys.indexOf(note.name);
             if (keyIndex <= lastKeyIndex)
                 currentOctave++;
-            result.push({key: note, octave: currentOctave});
+            result.push({key: note.name, octave: currentOctave});
             lastKeyIndex = keyIndex;
         }
         return result;
