@@ -1,4 +1,4 @@
-import {chordNotes, Note} from "./MusicTheory";
+import {Chord, Note} from "./MusicTheory";
 
 describe("chord resolver", () => {
     test.each([
@@ -15,6 +15,6 @@ describe("chord resolver", () => {
         ["B", ["B", "Eb", "F#"]],
         ["Bb", ["Bb", "D", "F"]],
     ])("Chord %s is made up of %s", (chordName, notes) => {
-        expect(chordNotes(chordName)).toEqual(notes.map(name => new Note(name)))
+        expect(new Chord(chordName).notes()).toEqual(notes.map(name => new Note(name)))
     })
 })
