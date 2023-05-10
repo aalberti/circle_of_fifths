@@ -12,7 +12,7 @@ export class Scale {
             {semitones: 5, modifier: "M"},
             {semitones: 7, modifier: "M"},
             {semitones: 9, modifier: "m"},
-            {semitones: 11, modifier: "mb5"},
+            {semitones: 11, modifier: "dim"},
         ]
         const firstNote = new Chord(this.name).root()
         return majorProgression

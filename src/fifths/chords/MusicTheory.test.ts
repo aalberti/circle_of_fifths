@@ -30,7 +30,18 @@ test.each([
 })
 
 test.each([
-    ["CM", ["CM", "Dm", "Em", "FM", "GM", "Am", "Bmb5"]]
+    ["CM", ["CM", "Dm", "Em", "FM", "GM", "Am", "Bdim"]],
+    ["DbM", ["DbM", "Ebm", "Fm", "F#M", "AbM", "Bbm", "Cdim"]],
+    ["DM", ["DM", "Em", "F#m", "GM", "AM", "Bm", "Dbdim"]],
+    ["EbM", ["EbM", "Fm", "Gm", "AbM", "BbM", "Cm", "Ddim"]],
+    ["EM", ["EM", "F#m", "Abm", "AM", "BM", "Dbm", "Ebdim"]],
+    ["FM", ["FM", "Gm", "Am", "BbM", "CM", "Dm", "Edim"]],
+    ["F#M", ["F#M", "Abm", "Bbm", "BM", "DbM", "Ebm", "Fdim"]],
+    ["GM", ["GM", "Am", "Bm", "CM", "DM", "Em", "F#dim"]],
+    ["AbM", ["AbM", "Bbm", "Cm", "DbM", "EbM", "Fm", "Gdim"]],
+    ["AM", ["AM", "Bm", "Dbm", "DM", "EM", "F#m", "Abdim"]],
+    ["BbM", ["BbM", "Cm", "Dm", "EbM", "FM", "Gm", "Adim"]],
+    ["BM", ["BM", "Dbm", "Ebm", "EM", "F#M", "Abm", "Bbdim"]],
 ])("Scale %s is made up of %s", (scaleName, chords) => {
     expect(new Scale(scaleName).chords()).toEqual(chords.map(name => new Chord(name)))
 });
