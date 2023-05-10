@@ -1,5 +1,6 @@
 export class Scale {
     readonly name: String;
+
     constructor(name: String) {
         this.name = name;
     }
@@ -32,15 +33,25 @@ export class Chord {
     }
 
     notes(): Note[] {
-        if (this.isMinor())
+        if (this.isDiminished())
+            return [this.root(), this.root().flatThird(), this.root().flatFifth()];
+        else if (this.isMinor())
             return [this.root(), this.root().flatThird(), this.root().fifth()];
         else
             return [this.root(), this.root().third(), this.root().fifth()];
     }
 
     private root() {
-        const rootName: string = this.name.slice(0, -1);
+        let rootName: string;
+        if (this.isDiminished())
+            rootName = this.name.slice(0, -3);
+        else
+            rootName = this.name.slice(0, -1);
         return new Note(rootName);
+    }
+
+    private isDiminished() {
+        return this.name.endsWith("dim");
     }
 
     private isMinor() {
@@ -63,6 +74,10 @@ export class Note {
 
     flatThird() {
         return this.plusSemitones(3)
+    }
+
+    flatFifth() {
+        return this.plusSemitones(6)
     }
 
     fifth() {

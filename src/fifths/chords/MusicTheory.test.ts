@@ -25,6 +25,18 @@ test.each([
     ["Am", ["A", "C", "E"]],
     ["Bbm", ["Bb", "Db", "F"]],
     ["Bm", ["B", "D", "F#"]],
+    ["Cdim", ["C", "Eb", "F#"]],
+    ["Dbdim", ["Db", "E", "G"]],
+    ["Ddim", ["D", "F", "Ab"]],
+    ["Ebdim", ["Eb", "F#", "A"]],
+    ["Edim", ["E", "G", "Bb"]],
+    ["Fdim", ["F", "Ab", "B"]],
+    ["F#dim", ["F#", "A", "C"]],
+    ["Gdim", ["G", "Bb", "Db"]],
+    ["Abdim", ["Ab", "B", "D"]],
+    ["Adim", ["A", "C", "Eb"]],
+    ["Bbdim", ["Bb", "Db", "E"]],
+    ["Bdim", ["B", "D", "F"]],
 ])("Chord %s is made up of %s", (chordName, notes) => {
     expect(new Chord(chordName).notes()).toEqual(notes.map(name => new Note(name)))
 })
