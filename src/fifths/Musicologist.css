@@ -1,7 +1,8 @@
 .musicologist {
     display: flex;
     flex-flow: row;
-    align-items: center;
+    align-items: stretch;
+    max-height: 600px;
 }
 
 .chords {
@@ -10,6 +11,18 @@
     align-items: center;
 }
 
-.chordName {
+.scaleName {
     width: 100px
+}
+
+.scaleBox {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.chordsBox {
+    display: flex;
+    flex-flow: column wrap;
+    max-height: 100%;
 }

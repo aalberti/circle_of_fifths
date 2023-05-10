@@ -1,3 +1,9 @@
+.keyboardContainer {
+    margin: 10px;
+    display: flex;
+    flex-flow: row;
+}
+
 .keyboardImage {
     width: 300px;
     height: 100px;
@@ -8,4 +14,14 @@
     height: 8px;
     background: blue;
     border-radius: 50%
+}
+
+.keyboardNameContainer {
+    width: 70px;
+}
+
+.keyboardName {
+    font-size: large;
+    text-align: right;
+    padding-right: 5px;
 }

@@ -5,24 +5,30 @@ import KeyboardPositions from "./KeyboardPositions";
 import {Note} from "../chords/MusicTheory";
 
 interface KeyboardProps {
+    name: string
     notes: Note[]
 }
 
-const Keyboard: FC<KeyboardProps> = ({notes}) => {
+const Keyboard: FC<KeyboardProps> = ({name, notes}) => {
     const imageRef = useRef<HTMLImageElement>(null)
     const width = imageRef.current == null ? 300 : imageRef.current.clientWidth
     const height = imageRef.current == null ? 100 : imageRef.current.clientHeight
     const keyboard = new KeyboardPositions(width, height);
-    return <div style={{position: "relative"}}>
-        <img ref={imageRef} className="keyboardImage" src={keyboardImage} alt={`${notes} on keyboard`}/>
-        {keyboard.keysPositions(notes)
-            .map(({x, y}) => <div className="keyPressed" style={{
-                transform: "translate(-50%, -50%)",
-                position: "absolute",
-                top: `${y}px`,
-                left: `${x}px`,
-            }}/>)
-        }
+    return <div className="keyboardContainer">
+        <div className="keyboardNameContainer">
+            <div className="keyboardName">{name}</div>
+        </div>
+        <div style={{position: "relative"}}>
+            <img ref={imageRef} className="keyboardImage" src={keyboardImage} alt={`${notes} on keyboard`}/>
+            {keyboard.keysPositions(notes)
+                .map(({x, y}) => <div className="keyPressed" style={{
+                    transform: "translate(-50%, -50%)",
+                    position: "absolute",
+                    top: `${y}px`,
+                    left: `${x}px`,
+                }}/>)
+            }
+        </div>
     </div>;
 };
 
