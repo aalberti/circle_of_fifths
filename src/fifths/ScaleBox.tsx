@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import './Musicologist.css'
 import Keyboard from "./keyboard/Keyboard";
-import {Chord} from "./chords/MusicTheory";
+import {Scale} from "./chords/MusicTheory";
 
 interface ScaleBoxProps {
     chordName: string
@@ -10,7 +10,11 @@ interface ScaleBoxProps {
 const ScaleBox: FC<ScaleBoxProps> = ({chordName}) => {
     return <div className="chords">
         <div className="chordName">{chordName}</div>
-        <Keyboard notes={new Chord(chordName).notes()}/>
+        <div style={{display: "flex"}}>
+            {new Scale(chordName).chords().map(
+                chord => <Keyboard notes={chord.notes()}/>
+            )}
+        </div>
     </div>
 }
 

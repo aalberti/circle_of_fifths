@@ -1,23 +1,26 @@
 export class Scale {
-    readonly name: String;
+    readonly name: string;
 
-    constructor(name: String) {
+    constructor(name: string) {
         this.name = name;
     }
 
     chords(): Chord[] {
-        const majorProgression = [
-            {semitones: 0, modifier: "M"},
-            {semitones: 2, modifier: "m"},
-            {semitones: 4, modifier: "m"},
-            {semitones: 5, modifier: "M"},
-            {semitones: 7, modifier: "M"},
-            {semitones: 9, modifier: "m"},
-            {semitones: 11, modifier: "dim"},
-        ]
-        const firstNote = new Chord(this.name).root()
-        return majorProgression
-            .map(generator => this.toChord(firstNote, generator))
+        const degreeI = new Chord(this.name);
+        if (degreeI.isMajor()) {
+            const firstNote = degreeI.root()
+            return [
+                {semitones: 0, modifier: "M"},
+                {semitones: 2, modifier: "m"},
+                {semitones: 4, modifier: "m"},
+                {semitones: 5, modifier: "M"},
+                {semitones: 7, modifier: "M"},
+                {semitones: 9, modifier: "m"},
+                {semitones: 11, modifier: "dim"},
+            ].map(generator => this.toChord(firstNote, generator))
+        } else {
+            return [degreeI]
+        }
     }
 
     private toChord(note: Note, generator: { modifier: string; semitones: number }) {
@@ -41,7 +44,7 @@ export class Chord {
             return [this.root(), this.root().third(), this.root().fifth()];
     }
 
-    private root() {
+    root() {
         let rootName: string;
         if (this.isDiminished())
             rootName = this.name.slice(0, -3);
@@ -50,12 +53,16 @@ export class Chord {
         return new Note(rootName);
     }
 
-    private isDiminished() {
+    isDiminished() {
         return this.name.endsWith("dim");
     }
 
-    private isMinor() {
+    isMinor() {
         return this.name.endsWith("m");
+    }
+
+    isMajor() {
+        return this.name.endsWith("M");
     }
 }
 
