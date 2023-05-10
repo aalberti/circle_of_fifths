@@ -6,8 +6,7 @@ export class Chord {
     }
 
     private root() {
-        let rootName: string;
-        rootName = this.isMinor() ? this.name.slice(0, -1) : this.name;
+        const rootName: string = this.name.slice(0, -1);
         return new Note(rootName);
     }
 

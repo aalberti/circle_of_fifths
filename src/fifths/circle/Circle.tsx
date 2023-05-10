@@ -22,17 +22,17 @@ const Circle: FC<CircleProps> = ({onChordSelected}) => {
 
 function chordBoxes(radius: number): ChordBoxProps[] {
     const chords = [
-        {major: "C", minor: "Am"},
-        {major: "G", minor: "Em"},
-        {major: "D", minor: "Bm"},
-        {major: "A", minor: "F#m"},
-        {major: "E", minor: "C#m"},
-        {major: "B", minor: "Abm"},
-        {major: "C#", minor: "Bbm"},
-        {major: "Ab", minor: "Fm"},
-        {major: "Eb", minor: "Cm"},
-        {major: "Bb", minor: "Gm"},
-        {major: "F", minor: "Dm"},
+        {major: "CM", minor: "Am"},
+        {major: "GM", minor: "Em"},
+        {major: "DM", minor: "Bm"},
+        {major: "AM", minor: "F#m"},
+        {major: "EM", minor: "C#m"},
+        {major: "BM", minor: "Abm"},
+        {major: "C#M", minor: "Bbm"},
+        {major: "AbM", minor: "Fm"},
+        {major: "EbM", minor: "Cm"},
+        {major: "BbM", minor: "Gm"},
+        {major: "FM", minor: "Dm"},
     ]
     let slice = 360 / chords.length;
 
