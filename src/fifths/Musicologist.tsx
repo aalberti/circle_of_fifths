@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import Circle from "./Circle";
+import Circle from "./circle/Circle";
 import './Musicologist.css'
-import Chords from "./Chords";
+import ScaleBox from "./ScaleBox";
 
 export function Musicologist() {
     const [chord, setChord] = useState<string>("");
     return <div className="musicologist">
         <Circle onChordSelected={setChord}/>
-        <Chords chordName={chord}/>
+        <ScaleBox chordName={chord}/>
     </div>
 }

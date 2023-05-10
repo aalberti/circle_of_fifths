@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import './Musicologist.css'
+import './Circle.css'
 
 interface RadialCoordinates {
     rotation: number,

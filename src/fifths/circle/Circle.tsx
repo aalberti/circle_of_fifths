@@ -1,6 +1,6 @@
 import ChordBox, {ChordBoxProps} from "./ChordBox";
 import React, {FC, useRef} from "react";
-import './Musicologist.css'
+import './Circle.css'
 
 interface CircleProps {
     onChordSelected: (chordName: string) => void;
