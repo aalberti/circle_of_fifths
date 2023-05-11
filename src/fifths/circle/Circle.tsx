@@ -1,5 +1,5 @@
 import ChordBox, {ChordBoxProps} from "./ChordBox";
-import React, {FC, useRef} from "react";
+import React, {FC, useLayoutEffect, useRef, useState} from "react";
 import './Circle.css'
 
 interface CircleProps {
@@ -8,7 +8,11 @@ interface CircleProps {
 
 const Circle: FC<CircleProps> = ({onChordSelected}) => {
     const myself = useRef<HTMLDivElement>(null);
-    let radius: number = myself.current == null ? 100 : myself.current.clientWidth / 2;
+    const [radius, setRadius] = useState<number>(100)
+
+    useLayoutEffect(() => {
+        setRadius((myself.current?.clientWidth ?? 200) / 2)
+    })
 
     return <div className="circle" ref={myself}>
         <div style={{position: "absolute", left: "50%", top: "50%"}}>
