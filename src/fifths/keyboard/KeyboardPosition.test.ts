@@ -18,12 +18,12 @@ describe('keyboard positions', () => {
         [["B", "G"], {x: 246, y: 90}],
         [["B", "A"], {x: 268, y: 90}],
         [["B", "B"], {x: 289, y: 90}],
-        [["Db"], {x: 21, y: 61}],
+        [["C#"], {x: 21, y: 61}],
         [["Eb"], {x: 43, y: 61}],
         [["F#"], {x: 86, y: 61}],
         [["Ab"], {x: 107, y: 61}],
         [["Bb"], {x: 129, y: 61}],
-        [["B", "Db"], {x: 171, y: 61}],
+        [["B", "C#"], {x: 171, y: 61}],
         [["B", "Eb"], {x: 193, y: 61}],
         [["B", "F#"], {x: 236, y: 61}],
         [["B", "Ab"], {x: 257, y: 61}],
@@ -53,7 +53,7 @@ describe("guess octaves", () => {
 
 test("positions for a chord", () => {
     const keyboard = new KeyboardPositions(300, 100);
-    expect(keyboard.keysPositions(toNotes(["F#", "A", "Db"])))
+    expect(keyboard.keysPositions(toNotes(["F#", "A", "C#"])))
         .toEqual([{x: 86, y: 61}, {x: 118, y: 90}, {x: 171, y: 61}])
 })
 

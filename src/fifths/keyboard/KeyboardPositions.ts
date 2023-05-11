@@ -14,7 +14,7 @@ class KeyboardPositions {
     keysPositions = (notes: Note[]) => this.onOctaves(notes)
         .map(({key, octave}) => this.keyPosition(key, octave));
 
-    static keys = ["C", "Db", "D", "Eb", "E", "", "F", "F#", "G", "Ab", "A", "Bb", "B"]
+    static keys = ["C", "C#", "D", "Eb", "E", "", "F", "F#", "G", "Ab", "A", "Bb", "B"]
 
     private keyPosition = (key: string, octaveIndex: number): Position => {
         let interval = this.keyboardWidth / 28;

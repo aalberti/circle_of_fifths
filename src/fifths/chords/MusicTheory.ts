@@ -92,7 +92,7 @@ export class Chord {
     }
 }
 
-const octave = ["C", "Db", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"]
+const octave = ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"]
 
 export class Note {
     readonly name: string;
