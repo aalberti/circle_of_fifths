@@ -1,26 +1,27 @@
 import React, {FC} from "react";
 import './Circle.css'
 
-interface RadialCoordinates {
-    rotation: number,
-    radius: number,
+export interface Coordinates {
+    x: number,
+    y: number
 }
 
 export interface ChordBoxProps {
-    radial: RadialCoordinates,
+    coordinates: Coordinates,
     name: string,
     onClick?: (text: string) => void
 }
 
-const ChordBox: FC<ChordBoxProps> = ({radial, name, onClick}) => {
+const ChordBox: FC<ChordBoxProps> = ({coordinates, name, onClick}) => {
     return <div
         className="chordBox"
         style={{
+            top: coordinates.y,
+            left: coordinates.x,
             transform:
-                `translate(-50%, -50%) rotate(${radial.rotation}deg) translate(${radial.radius}px) rotate(${-radial.rotation}deg)`
+                `translate(-50%, -50%)`
         }}
-        onClick={() => onClick?.(name)}
-    >
+        onClick={() => onClick?.(name)}>
         <div style={{verticalAlign: "middle", userSelect: "none"}}>
             {name}
         </div>
