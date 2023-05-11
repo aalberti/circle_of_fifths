@@ -54,6 +54,18 @@ test.each([
     ["AM", ["AM", "Bm", "Dbm", "DM", "EM", "F#m", "Abdim"]],
     ["BbM", ["BbM", "Cm", "Dm", "EbM", "FM", "Gm", "Adim"]],
     ["BM", ["BM", "Dbm", "Ebm", "EM", "F#M", "Abm", "Bbdim"]],
+    ["Cm", ["Cm", "Ddim", "EbM", "Fm", "Gm", "AbM", "BbM"]],
+    ["Dbm", ["Dbm", "Ebdim", "EM", "F#m", "Abm", "AM", "BM"]],
+    ["Dm", ["Dm", "Edim", "FM", "Gm", "Am", "BbM", "CM"]],
+    ["Ebm", ["Ebm", "Fdim", "F#M", "Abm", "Bbm", "BM", "DbM"]],
+    ["Em", ["Em", "F#dim", "GM", "Am", "Bm", "CM", "DM"]],
+    ["Fm", ["Fm", "Gdim", "AbM", "Bbm", "Cm", "DbM", "EbM"]],
+    ["F#m", ["F#m", "Abdim", "AM", "Bm", "Dbm", "DM", "EM"]],
+    ["Gm", ["Gm", "Adim", "BbM", "Cm", "Dm", "EbM", "FM"]],
+    ["Abm", ["Abm", "Bbdim", "BM", "Dbm", "Ebm", "EM", "F#M"]],
+    ["Am", ["Am", "Bdim", "CM", "Dm", "Em", "FM", "GM"]],
+    ["Bbm", ["Bbm", "Cdim", "DbM", "Ebm", "Fm", "F#M", "AbM"]],
+    ["Bm", ["Bm", "Dbdim", "DM", "Em", "F#m", "GM", "AM"]],
 ])("Scale %s is made up of %s", (scaleName, chords) => {
     expect(new Scale(scaleName).chords()).toEqual(chords.map(name => new Chord(name)))
 });

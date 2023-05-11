@@ -1,3 +1,9 @@
+interface ChordGenerator {
+    base: Note
+    semitonesOffset: number
+    modifier: string
+}
+
 export class Scale {
     readonly name: string;
 
@@ -7,24 +13,44 @@ export class Scale {
 
     chords(): Chord[] {
         const degreeI = new Chord(this.name);
-        if (degreeI.isMajor()) {
-            const firstNote = degreeI.root()
-            return [
-                {semitones: 0, modifier: "M"},
-                {semitones: 2, modifier: "m"},
-                {semitones: 4, modifier: "m"},
-                {semitones: 5, modifier: "M"},
-                {semitones: 7, modifier: "M"},
-                {semitones: 9, modifier: "m"},
-                {semitones: 11, modifier: "dim"},
-            ].map(generator => this.toChord(firstNote, generator))
-        } else {
-            return [degreeI]
-        }
+        const generators:ChordGenerator[] = this.chordGenerators(degreeI);
+        return generators
+            .map(generator => this.toChord(generator))
     }
 
-    private toChord(note: Note, generator: { modifier: string; semitones: number }) {
-        return new Chord(note.plusSemitones(generator.semitones).name + generator.modifier);
+    private chordGenerators(degreeI: Chord):ChordGenerator[] {
+        let generators: { offset: number; modifier: string }[];
+        if (degreeI.isMajor()) {
+            generators = [
+                {offset: 0, modifier: "M"},
+                {offset: 2, modifier: "m"},
+                {offset: 4, modifier: "m"},
+                {offset: 5, modifier: "M"},
+                {offset: 7, modifier: "M"},
+                {offset: 9, modifier: "m"},
+                {offset: 11, modifier: "dim"},
+            ];
+        } else {
+            generators = [
+                {offset: 0, modifier: "m"},
+                {offset: 2, modifier: "dim"},
+                {offset: 3, modifier: "M"},
+                {offset: 5, modifier: "m"},
+                {offset: 7, modifier: "m"},
+                {offset: 8, modifier: "M"},
+                {offset: 10, modifier: "M"},
+            ];
+        }
+        return generators
+            .map(generator => ({
+                base: degreeI.root(),
+                semitonesOffset: generator.offset,
+                modifier: generator.modifier
+            }));
+    }
+
+    private toChord(generator: ChordGenerator) {
+        return new Chord(generator.base.plusSemitones(generator.semitonesOffset).name + generator.modifier);
     }
 }
 
