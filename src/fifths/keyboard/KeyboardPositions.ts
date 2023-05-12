@@ -22,7 +22,7 @@ class KeyboardPositions {
         let keyIndex = KeyboardPositions.keys.indexOf(key);
         let decimalX = (keyIndex + 1) * interval + octaveOffset;
         let x = Math.round(decimalX);
-        const y = Math.round(this.keyboardHeight * (key.length == 1 ? 0.9 : 0.61));
+        const y = Math.round(this.keyboardHeight * (key.length === 1 ? 0.9 : 0.61));
         return {x: x, y: y}
     };
 
