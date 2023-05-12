@@ -7,6 +7,6 @@ export function Musicologist() {
     const [scale, setScale] = useState<string>("");
     return <div className="musicologist">
         <Circle diameter={500} onScaleSelected={setScale}/>
-        <ScaleBox scaleName={scale}/>
+        {scale ? <ScaleBox scaleName={scale}/> : null}
     </div>
 }

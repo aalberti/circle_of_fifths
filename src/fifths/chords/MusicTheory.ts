@@ -12,7 +12,6 @@ export class Scale {
     }
 
     chords(): Chord[] {
-        if (!this.name) return []
         const degreeI = new Chord(this.name);
         const generators:ChordGenerator[] = this.chordGenerators(degreeI);
         return generators

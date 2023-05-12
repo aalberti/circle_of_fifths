@@ -69,7 +69,3 @@ test.each([
 ])("Scale %s is made up of %s", (scaleName, chords) => {
     expect(new Scale(scaleName).chords()).toEqual(chords.map(name => new Chord(name)))
 });
-
-test("unknown scale has no chord", () => {
-    expect(new Scale("").chords()).toEqual([])
-})

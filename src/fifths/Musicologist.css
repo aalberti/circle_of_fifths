@@ -12,7 +12,12 @@
 }
 
 .scaleName {
-    width: 100px
+    width: 100px;
+    height: 100%;
+    border-right: white solid 1px;
+    text-align: right;
+    padding-right: 15px;
+    padding-top: 20px;
 }
 
 .scaleBox {
