@@ -4,14 +4,14 @@ import Keyboard from "./keyboard/Keyboard";
 import {Scale} from "./chords/MusicTheory";
 
 interface ScaleBoxProps {
-    chordName: string
+    scaleName: string
 }
 
-const ScaleBox: FC<ScaleBoxProps> = ({chordName}) => {
+const ScaleBox: FC<ScaleBoxProps> = ({scaleName}) => {
     return <div className="scaleBox">
-        <div className="scaleName">{chordName}</div>
+        <div className="scaleName">{scaleName}</div>
         <div className="chordsBox" style={{display: "flex"}}>
-            {new Scale(chordName).chords().map(
+            {new Scale(scaleName).chords().map(
                 chord => <Keyboard key={chord.name} name={chord.name} notes={chord.notes()}/>
             )}
         </div>

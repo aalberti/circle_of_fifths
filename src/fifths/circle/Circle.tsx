@@ -4,15 +4,15 @@ import {Group, Layer, Stage, Text, Wedge} from "react-konva";
 
 interface CircleProps {
     diameter: number
-    onChordSelected: (chordName: string) => void;
+    onScaleSelected: (scaleName: string) => void;
 }
 
-const Circle: FC<CircleProps> = ({diameter, onChordSelected}) => {
+const Circle: FC<CircleProps> = ({diameter, onScaleSelected}) => {
     const slices = ["C", "G", "D", "A", "E", "B", "C#", "Ab", "Eb", "Bb", "F"]
     return <div className="circle">
         <Stage width={diameter} height={diameter}>
-            {wheel(slices.map(name => name + "M"), onChordSelected, diameter / 2, diameter / 2)}
-            {wheel(slices.map(name => name + "m"), onChordSelected, diameter / 4, diameter / 2)}
+            {wheel(slices.map(name => name + "M"), onScaleSelected, diameter / 2, diameter / 2)}
+            {wheel(slices.map(name => name + "m"), onScaleSelected, diameter / 4, diameter / 2)}
         </Stage></div>
 }
 

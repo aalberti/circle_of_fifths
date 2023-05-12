@@ -4,9 +4,9 @@ import './Musicologist.css'
 import ScaleBox from "./ScaleBox";
 
 export function Musicologist() {
-    const [chord, setChord] = useState<string>("");
+    const [scale, setScale] = useState<string>("");
     return <div className="musicologist">
-        <Circle diameter={500} onChordSelected={setChord}/>
-        <ScaleBox chordName={chord}/>
+        <Circle diameter={500} onScaleSelected={setScale}/>
+        <ScaleBox scaleName={scale}/>
     </div>
 }
