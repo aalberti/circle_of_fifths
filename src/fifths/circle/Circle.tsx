@@ -37,7 +37,7 @@ const Circle: FC<CircleProps> = ({diameter, onScaleSelected}) => {
         </Stage></div>
 }
 
-const initialFifths = () => ["C", "G", "D", "A", "E", "B", "C#", "Ab", "Eb", "Bb", "F"]
+const initialFifths = () => ["C", "G", "D", "A", "E", "B", "F#", "C#", "Ab", "Eb", "Bb", "F"]
     .flatMap(name => [
         {
             name: name + "M",
