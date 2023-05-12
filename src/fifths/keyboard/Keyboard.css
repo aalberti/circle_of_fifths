@@ -16,12 +16,21 @@
     border-radius: 50%
 }
 
-.keyboardNameContainer {
-    width: 70px;
+.chordBox {
+    display: flex;
+    flex-flow: row nowrap;
 }
 
-.keyboardName {
+.chordDescriptor {
+    display: flex;
+    flex-flow: column nowrap;
     font-size: large;
     text-align: right;
-    padding-right: 5px;
+    width: 70px;
+    padding-top: 10px;
+}
+
+.chordDescriptorSeparator {
+    color: white;
+    width: 100%;
 }
