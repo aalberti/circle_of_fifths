@@ -20,7 +20,7 @@ function wheel(slices: string[], onClick: (value: string) => void, radius: numbe
     return <Layer x={centerOffset} y={centerOffset}>
         {slices.map((name, i) => {
                 const angle = 360 / slices.length
-                const rotation = i * angle
+                const rotation = i * angle - 90 - angle / 2
                 const x = radius / 2
                 const halfAngleInRadians = angle * Math.PI / 360;
                 const textHeight = Math.tan(halfAngleInRadians) * x * 2
