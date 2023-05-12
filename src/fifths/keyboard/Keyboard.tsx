@@ -21,7 +21,7 @@ const Keyboard: FC<KeyboardProps> = ({name, notes}) => {
         <div style={{position: "relative"}}>
             <img ref={imageRef} className="keyboardImage" src={keyboardImage} alt={`${notes} on keyboard`}/>
             {keyboard.keysPositions(notes)
-                .map(({x, y}) => <div className="keyPressed" style={{
+                .map(({x, y}) => <div key={`(${x}, ${y})`} className="keyPressed" style={{
                     transform: "translate(-50%, -50%)",
                     position: "absolute",
                     top: `${y}px`,

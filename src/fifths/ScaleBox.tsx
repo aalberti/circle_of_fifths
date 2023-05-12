@@ -12,7 +12,7 @@ const ScaleBox: FC<ScaleBoxProps> = ({chordName}) => {
         <div className="scaleName">{chordName}</div>
         <div className="chordsBox" style={{display: "flex"}}>
             {new Scale(chordName).chords().map(
-                chord => <Keyboard name={chord.name} notes={chord.notes()}/>
+                chord => <Keyboard key={chord.name} name={chord.name} notes={chord.notes()}/>
             )}
         </div>
     </div>
