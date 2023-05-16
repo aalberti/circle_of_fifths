@@ -11,6 +11,7 @@ interface CircleProps {
 interface DynamicSlice {
     name: string
     hover: boolean
+    selected: boolean
 }
 
 const Circle: FC<CircleProps> = ({diameter, onScaleSelected}) => {
@@ -30,10 +31,18 @@ const Circle: FC<CircleProps> = ({diameter, onScaleSelected}) => {
         })))
     }
 
+    const onClick = (name: string) => {
+        setSlices(slices.map(slice => ({
+            ...slice,
+            selected: (name === slice.name)
+        })))
+        onScaleSelected(name)
+    }
+
     return <div className="circle">
         <Stage width={diameter} height={diameter}>
-            {wheel(majors(slices), diameter / 2, diameter / 2, onScaleSelected, onMouseOver, onMouseOut)}
-            {wheel(minors(slices), diameter / 4, diameter / 2, onScaleSelected, onMouseOver, onMouseOut)}
+            {wheel(majors(slices), diameter / 2, diameter / 2, onClick, onMouseOver, onMouseOut)}
+            {wheel(minors(slices), diameter / 4, diameter / 2, onClick, onMouseOver, onMouseOut)}
         </Stage></div>
 }
 
@@ -41,11 +50,13 @@ function initialFifths() {
     return ["C", "G", "D", "A", "E", "B", "F#", "C#", "Ab", "Eb", "Bb", "F"]
         .map(name => ({
             name: name + "M",
-            hover: false
+            hover: false,
+            selected: false
         })).concat(["A", "E", "B", "F#", "C#", "Ab", "Eb", "Bb", "F", "C", "G", "D"]
             .map(name => ({
                 name: name + "m",
-                hover: false
+                hover: false,
+                selected: false
             })));
 }
 
@@ -61,7 +72,7 @@ function wheel(slices: DynamicSlice[], radius: number, centerOffset: number,
                onClick: (value: string) => void,
                onMouseOver: (e: KonvaEventObject<MouseEvent>) => void, onMouseOut: (e: KonvaEventObject<MouseEvent>) => void) {
     return <Layer x={centerOffset} y={centerOffset}>
-        {slices.map(({name, hover}, i) => {
+        {slices.map(({name, hover, selected}, i) => {
                 const angle = 360 / slices.length
                 const rotation = i * angle - 90 - angle / 2
                 const x = radius / 2
@@ -75,7 +86,7 @@ function wheel(slices: DynamicSlice[], radius: number, centerOffset: number,
                         radius={radius}
                         stroke="grey"
                         strokeWidth={1}
-                        fill={hover ? "lightyellow" : "white"}
+                        fill={selected ? "orange" : hover ? "lightyellow" : "white"}
                         id={name}/>
                     <Text text={name}
                           rotation={angle / 2}
@@ -84,7 +95,8 @@ function wheel(slices: DynamicSlice[], radius: number, centerOffset: number,
                           height={textHeight}
                           verticalAlign="middle"
                           align="center"
-                          id={name}/>
+                          id={name}
+                          fontSize={selected ? 18 : 14}/>
                 </Group>;
             }
         )}
