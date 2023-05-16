@@ -24,6 +24,11 @@ export class Scale {
             return [0, 2, 3, 5, 7, 8, 10].map(offset => this.degreeI().root().plusSemitones(offset))
     }
 
+    notesOn2Octaves(): Note[] {
+        const notesOn1Octave = sortInOctave(this.notes())
+        return notesOn1Octave.concat(notesOn1Octave);
+    }
+
     private degreeI() {
         return new Chord(this.name);
     }
@@ -132,4 +137,12 @@ export class Note {
         const resultIndex = (thisIndex + semitones) % octave.length;
         return new Note(octave[resultIndex])
     }
+
+    isLowerThanInOctave(other: Note): boolean {
+        return octave.indexOf(this.name) < octave.indexOf(other.name)
+    }
+}
+
+export function sortInOctave(notes: Note[]) {
+    return notes.sort((a, b) => a.isLowerThanInOctave(b) ? -1 : 1)
 }

@@ -12,7 +12,7 @@ const ScaleBox: FC<ScaleBoxProps> = ({scaleName}) => {
     return <div className="scaleBox">
         <div className="scaleDescriptor">
             <div className="scaleName">{scaleName}</div>
-            <Keyboard notes={scale.notes()}/>
+            <Keyboard notes={scale.notesOn2Octaves()}/>
         </div>
         <div className="chordsBox" style={{display: "flex"}}>
             {scale.chords().map(
