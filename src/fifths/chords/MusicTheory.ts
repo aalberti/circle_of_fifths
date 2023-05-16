@@ -12,13 +12,23 @@ export class Scale {
     }
 
     chords(): Chord[] {
-        const degreeI = new Chord(this.name);
-        const generators:ChordGenerator[] = this.chordGenerators(degreeI);
+        const generators: ChordGenerator[] = this.chordGenerators(this.degreeI());
         return generators
             .map(generator => this.toChord(generator))
     }
 
-    private chordGenerators(degreeI: Chord):ChordGenerator[] {
+    notes(): Note[] {
+        if (this.degreeI().isMajor())
+            return [0, 2, 4, 5, 7, 9, 11].map(offset => this.degreeI().root().plusSemitones(offset))
+        else
+            return [0, 2, 3, 5, 7, 8, 10].map(offset => this.degreeI().root().plusSemitones(offset))
+    }
+
+    private degreeI() {
+        return new Chord(this.name);
+    }
+
+    private chordGenerators(degreeI: Chord): ChordGenerator[] {
         let generators: { offset: number; modifier: string }[];
         if (degreeI.isMajor()) {
             generators = [

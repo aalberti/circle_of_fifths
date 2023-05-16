@@ -66,6 +66,36 @@ test.each([
     ["Am", ["Am", "Bdim", "CM", "Dm", "Em", "FM", "GM"]],
     ["Bbm", ["Bbm", "Cdim", "C#M", "Ebm", "Fm", "F#M", "AbM"]],
     ["Bm", ["Bm", "C#dim", "DM", "Em", "F#m", "GM", "AM"]],
-])("Scale %s is made up of %s", (scaleName, chords) => {
+])("Scale %s is made up of chords %s", (scaleName, chords) => {
     expect(new Scale(scaleName).chords()).toEqual(chords.map(name => new Chord(name)))
+});
+
+
+test.each([
+    ["CM", ["C", "D", "E", "F", "G", "A", "B"]],
+    ["C#M", ["C#", "Eb", "F", "F#", "Ab", "Bb", "C"]],
+    ["DM", ["D", "E", "F#", "G", "A", "B", "C#"]],
+    ["EbM", ["Eb", "F", "G", "Ab", "Bb", "C", "D"]],
+    ["EM", ["E", "F#", "Ab", "A", "B", "C#", "Eb"]],
+    ["FM", ["F", "G", "A", "Bb", "C", "D", "E"]],
+    ["F#M", ["F#", "Ab", "Bb", "B", "C#", "Eb", "F"]],
+    ["GM", ["G", "A", "B", "C", "D", "E", "F#"]],
+    ["AbM", ["Ab", "Bb", "C", "C#", "Eb", "F", "G"]],
+    ["AM", ["A", "B", "C#", "D", "E", "F#", "Ab"]],
+    ["BbM", ["Bb", "C", "D", "Eb", "F", "G", "A"]],
+    ["BM", ["B", "C#", "Eb", "E", "F#", "Ab", "Bb"]],
+    ["Cm", ["C", "D", "Eb", "F", "G", "Ab", "Bb"]],
+    ["C#m", ["C#", "Eb", "E", "F#", "Ab", "A", "B"]],
+    ["Dm", ["D", "E", "F", "G", "A", "Bb", "C"]],
+    ["Ebm", ["Eb", "F", "F#", "Ab", "Bb", "B", "C#"]],
+    ["Em", ["E", "F#", "G", "A", "B", "C", "D"]],
+    ["Fm", ["F", "G", "Ab", "Bb", "C", "C#", "Eb"]],
+    ["F#m", ["F#", "Ab", "A", "B", "C#", "D", "E"]],
+    ["Gm", ["G", "A", "Bb", "C", "D", "Eb", "F"]],
+    ["Abm", ["Ab", "Bb", "B", "C#", "Eb", "E", "F#"]],
+    ["Am", ["A", "B", "C", "D", "E", "F", "G"]],
+    ["Bbm", ["Bb", "C", "C#", "Eb", "F", "F#", "Ab"]],
+    ["Bm", ["B", "C#", "D", "E", "F#", "G", "A"]],
+])("Scale %s has notes %s", (scaleName, notes) => {
+    expect(new Scale(scaleName).notes()).toEqual(notes.map(name => new Note(name)))
 });
