@@ -37,16 +37,17 @@ const Circle: FC<CircleProps> = ({diameter, onScaleSelected}) => {
         </Stage></div>
 }
 
-const initialFifths = () => ["C", "G", "D", "A", "E", "B", "F#", "C#", "Ab", "Eb", "Bb", "F"]
-    .flatMap(name => [
-        {
+function initialFifths() {
+    return ["C", "G", "D", "A", "E", "B", "F#", "C#", "Ab", "Eb", "Bb", "F"]
+        .map(name => ({
             name: name + "M",
             hover: false
-        }, {
-            name: name + "m",
-            hover: false
-        }
-    ]);
+        })).concat(["A", "E", "B", "F#", "C#", "Ab", "Eb", "Bb", "F", "C", "G", "D"]
+            .map(name => ({
+                name: name + "m",
+                hover: false
+            })));
+}
 
 function majors(slices: DynamicSlice[]) {
     return slices.filter(slice => slice.name.endsWith("M"));
