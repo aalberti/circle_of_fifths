@@ -8,10 +8,14 @@ interface ScaleBoxProps {
 }
 
 const ScaleBox: FC<ScaleBoxProps> = ({scaleName}) => {
+    const scale = new Scale(scaleName);
     return <div className="scaleBox">
-        <div className="scaleName">{scaleName}</div>
+        <div className="scaleDescriptor">
+            <div className="scaleName">{scaleName}</div>
+            <Keyboard notes={scale.notes()}/>
+        </div>
         <div className="chordsBox" style={{display: "flex"}}>
-            {new Scale(scaleName).chords().map(
+            {scale.chords().map(
                 (chord, degree) => <div className="chordBox" key={chord.name}>
                     <div className="chordDescriptor">
                         <div>{chord.name}</div>
