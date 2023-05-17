@@ -2,6 +2,7 @@ import {useState} from "react";
 import './Search.css'
 import {chordsContaining, Note, scalesContaining} from "../theory/MusicTheory";
 import {ChordDetail} from "../chord/ChordDetail";
+import {ScaleSummary} from "../scale/ScaleSummary";
 
 export function Search() {
     const [noteNames, setNoteNames] = useState<string>("")
@@ -16,16 +17,16 @@ export function Search() {
             </label>
         </div>
         <div className="searchResults">
-            {"chords:"}
-            <div className="chordResults">
+            chords:
+            <div className="searchResultsList">
                 {chordsContaining(notes())
                     .map(chord =>
-                        <ChordDetail key={chord.name} chord={chord} degree=""/>
+                        <ChordDetail chord={chord} key={chord.name}/>
                     )}
             </div>
-            <div>{`scales: ${scalesContaining(notes())
-                .map(scale => scale.name)
-                .join(", ")}`}
+            scales:
+            <div className="searchResultsList">{scalesContaining(notes())
+                .map(scale => <ScaleSummary scale={scale} key={scale.name}/>)}
             </div>
         </div>
     </div>

@@ -16,7 +16,7 @@
     align-items: flex-start;
 }
 
-.chordResults {
+.searchResultsList {
     display: flex;
     flex-flow: row;
     align-items: flex-start;

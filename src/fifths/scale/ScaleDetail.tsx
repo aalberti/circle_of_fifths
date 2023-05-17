@@ -1,15 +1,12 @@
 import React, {FC} from "react";
-import './ScaleDetail.css'
-import Keyboard from "../keyboard/Keyboard";
+import './Scale.css'
 import {Scale} from "../theory/MusicTheory";
 import {ChordDetail} from "../chord/ChordDetail";
+import {ScaleSummary} from "./ScaleSummary";
 
 const ScaleDetail: FC<{ scale: Scale }> = ({scale}) => {
     return <div className="scaleBox">
-        <div className="scaleDescriptor">
-            <div className="scaleName">{scale.name}</div>
-            <Keyboard notes={scale.notesOn2Octaves()}/>
-        </div>
+        <ScaleSummary scale={scale}/>
         <div className="chordsBox" style={{display: "flex"}}>
             {scale.chords().map((chord, degree) =>
                 <ChordDetail key={chord.name} chord={chord} degree={toRoman(degree)}/>
