@@ -1,3 +1,21 @@
+export function scalesInFifthsOrder() {
+    return majorScales().concat(minorScales());
+}
+
+export function majorScales() {
+    return new Array(12).fill("")
+        .map((_, i) => new Note("C").plusSemitones(7 * i))
+        .map(note => note.name + "M")
+        .map(name => new Scale(name));
+}
+
+export function minorScales() {
+    return new Array(12).fill("")
+        .map((_, i) => new Note("A").plusSemitones(7 * i))
+        .map(note => note.name + "m")
+        .map(name => new Scale(name));
+}
+
 interface ChordGenerator {
     base: Note
     semitonesOffset: number

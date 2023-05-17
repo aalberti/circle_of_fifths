@@ -2,6 +2,7 @@ import React, {FC, useState} from "react";
 import './Circle.css'
 import {Group, Layer, Stage, Text, Wedge} from "react-konva";
 import {KonvaEventObject} from "konva/lib/Node";
+import {scalesInFifthsOrder} from "../chords/MusicTheory";
 
 interface CircleProps {
     diameter: number
@@ -47,17 +48,13 @@ const Circle: FC<CircleProps> = ({diameter, onScaleSelected}) => {
 }
 
 function initialFifths() {
-    return ["C", "G", "D", "A", "E", "B", "F#", "C#", "Ab", "Eb", "Bb", "F"]
+    return scalesInFifthsOrder()
+        .map(scale => scale.name)
         .map(name => ({
-            name: name + "M",
+            name: name,
             hover: false,
             selected: false
-        })).concat(["A", "E", "B", "F#", "C#", "Ab", "Eb", "Bb", "F", "C", "G", "D"]
-            .map(name => ({
-                name: name + "m",
-                hover: false,
-                selected: false
-            })));
+        }))
 }
 
 function majors(slices: DynamicSlice[]) {

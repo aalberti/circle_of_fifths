@@ -1,4 +1,4 @@
-import {Chord, Note, Scale, sortInOctave} from "./MusicTheory";
+import {Chord, Note, Scale, scalesInFifthsOrder, sortInOctave} from "./MusicTheory";
 import {isEqual} from "lodash";
 
 test.each([
@@ -152,4 +152,13 @@ function distinct<T>(array: T[]): T[] {
 test("sort", () => {
     const unsorted = ["A", "B", "C", "D", "E", "F", "G"].map(name => new Note(name));
     expect(distinct(sortInOctave(unsorted))).toEqual(["C", "D", "E", "F", "G", "A", "B"].map(name => new Note(name)))
+})
+
+test("scales in fifths order", () => {
+    expect(scalesInFifthsOrder())
+        .toEqual([
+                "CM", "GM", "DM", "AM", "EM", "BM", "F#M", "C#M", "AbM", "EbM", "BbM", "FM",
+                "Am", "Em", "Bm", "F#m", "C#m", "Abm", "Ebm", "Bbm", "Fm", "Cm", "Gm", "Dm"
+            ].map(name => new Scale(name))
+        )
 })
