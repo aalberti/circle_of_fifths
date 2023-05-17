@@ -7,8 +7,12 @@ export const ChordDetail: FC<{ chord: Chord; degree: string; }> = ({chord, degre
     <div className="chordBox">
         <div className="chordDescriptor">
             <div>{chord.name}</div>
-            <hr className="chordDescriptorSeparator"/>
-            <div>{degree}</div>
+            {degree ?
+                <div>
+                    <hr className="chordDescriptorSeparator"/>
+                    <div>{degree}</div>
+                </div>
+                : ""}
         </div>
         <Keyboard notes={chord.notes()}/>
     </div>;

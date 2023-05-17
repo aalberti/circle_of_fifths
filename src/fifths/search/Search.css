@@ -1,11 +1,23 @@
 .search {
     display: flex;
-    flex-flow: row;
+    flex-flow: column;
     align-items: flex-start;
+}
+
+.searchInput {
+    font-size: medium;
+    display: flex;
+    flex-flow: row;
 }
 
 .searchResults {
     display: flex;
     flex-flow: column;
+    align-items: flex-start;
+}
+
+.chordResults {
+    display: flex;
+    flex-flow: row;
     align-items: flex-start;
 }
