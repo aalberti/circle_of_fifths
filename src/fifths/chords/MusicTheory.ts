@@ -1,3 +1,5 @@
+import {isEqual} from "lodash";
+
 export function scalesInFifthsOrder() {
     return majorScales().concat(minorScales());
 }
@@ -171,4 +173,28 @@ export class Note {
 
 export function sortInOctave(notes: Note[]) {
     return notes.sort((a, b) => a.isLowerThanInOctave(b) ? -1 : 1)
+}
+
+export function scalesContaining(notes: Note[]) {
+    return scalesInFifthsOrder()
+        .filter(scale => scale.chords()
+            .some(chord => chord.containsAllNotes(notes)));
+}
+
+function distinct<T>(array: T[]): T[] {
+    const result: T[] = [];
+    for (const item of array) {
+        const found = result.some((value) => isEqual(value, item));
+        if (!found) {
+            result.push(item);
+        }
+    }
+    return result;
+}
+
+export function chordsContaining(notes: Note[]) {
+    const allChords = distinct(scalesInFifthsOrder()
+        .flatMap(scale => scale.chords()));
+    return allChords
+        .filter(chord => chord.containsAllNotes(notes));
 }

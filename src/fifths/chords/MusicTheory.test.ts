@@ -1,4 +1,12 @@
-import {Chord, Note, Scale, scalesInFifthsOrder, sortInOctave} from "./MusicTheory";
+import {
+    Chord,
+    chordsContaining,
+    Note,
+    Scale,
+    scalesContaining,
+    scalesInFifthsOrder,
+    sortInOctave
+} from "./MusicTheory";
 import {isEqual} from "lodash";
 
 test.each([
@@ -38,8 +46,8 @@ test.each([
     ["Adim", ["A", "C", "Eb"]],
     ["Bbdim", ["Bb", "C#", "E"]],
     ["Bdim", ["B", "D", "F"]],
-])("Chord %s is made up of %s", (chordName, notes) => {
-    expect(new Chord(chordName).notes()).toEqual(notes.map(name => new Note(name)))
+])("Chord %s is made up of %s", (chordName, noteNames) => {
+    expect(new Chord(chordName).notes()).toEqual(notes(...noteNames))
 })
 
 test.each([
@@ -67,8 +75,8 @@ test.each([
     ["Am", ["Am", "Bdim", "CM", "Dm", "Em", "FM", "GM"]],
     ["Bbm", ["Bbm", "Cdim", "C#M", "Ebm", "Fm", "F#M", "AbM"]],
     ["Bm", ["Bm", "C#dim", "DM", "Em", "F#m", "GM", "AM"]],
-])("Scale %s is made up of chords %s", (scaleName, chords) => {
-    expect(new Scale(scaleName).chords()).toEqual(chords.map(name => new Chord(name)))
+])("Scale %s is made up of chords %s", (scaleName, chordNames) => {
+    expect(new Scale(scaleName).chords()).toEqual(chords(...chordNames))
 });
 
 test.each([
@@ -96,8 +104,8 @@ test.each([
     ["Am", ["A", "B", "C", "D", "E", "F", "G"]],
     ["Bbm", ["Bb", "C", "C#", "Eb", "F", "F#", "Ab"]],
     ["Bm", ["B", "C#", "D", "E", "F#", "G", "A"]],
-])("Scale %s has notes %s", (scaleName, notes) => {
-    expect(new Scale(scaleName).notes()).toEqual(notes.map(name => new Note(name)))
+])("Scale %s has notes %s", (scaleName, noteNames) => {
+    expect(new Scale(scaleName).notes()).toEqual(notes(...noteNames))
 });
 
 test.each([
@@ -125,8 +133,8 @@ test.each([
     ["Am", ["C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F", "G", "A", "B"]],
     ["Bbm", ["C", "C#", "Eb", "F", "F#", "Ab", "Bb", "C", "C#", "Eb", "F", "F#", "Ab", "Bb"]],
     ["Bm", ["C#", "D", "E", "F#", "G", "A", "B", "C#", "D", "E", "F#", "G", "A", "B"]],
-])("Scale %s has notes on 2 octaves %s", (scaleName, notes) => {
-    expect(new Scale(scaleName).notesOn2Octaves()).toEqual(notes.map(name => new Note(name)))
+])("Scale %s has notes on 2 octaves %s", (scaleName, noteNames) => {
+    expect(new Scale(scaleName).notesOn2Octaves()).toEqual(notes(...noteNames))
 });
 
 test.each([
@@ -150,25 +158,40 @@ function distinct<T>(array: T[]): T[] {
 }
 
 test("sort", () => {
-    const unsorted = ["A", "B", "C", "D", "E", "F", "G"].map(name => new Note(name));
-    expect(distinct(sortInOctave(unsorted))).toEqual(["C", "D", "E", "F", "G", "A", "B"].map(name => new Note(name)))
+    expect(
+        sortInOctave(
+            notes("A", "B", "C", "D", "E", "F", "G")))
+        .toEqual(
+            notes("C", "D", "E", "F", "G", "A", "B"))
 })
 
 test("scales in fifths order", () => {
     expect(scalesInFifthsOrder())
-        .toEqual([
-                "CM", "GM", "DM", "AM", "EM", "BM", "F#M", "C#M", "AbM", "EbM", "BbM", "FM",
-                "Am", "Em", "Bm", "F#m", "C#m", "Abm", "Ebm", "Bbm", "Fm", "Cm", "Gm", "Dm"
-            ].map(name => new Scale(name))
-        )
+        .toEqual(scales(
+            "CM", "GM", "DM", "AM", "EM", "BM", "F#M", "C#M", "AbM", "EbM", "BbM", "FM",
+            "Am", "Em", "Bm", "F#m", "C#m", "Abm", "Ebm", "Bbm", "Fm", "Cm", "Gm", "Dm"))
 })
 
 test("scale contains all notes", () => {
-    expect(new Chord("CM").containsAllNotes([new Note("C"), new Note("E")]))
+    expect(new Chord("CM").containsAllNotes(notes("C", "E")))
         .toEqual(true)
 })
 
 test("scale contains only some notes", () => {
-    expect(new Chord("CM").containsAllNotes([new Note("C"), new Note("D"), new Note("E")]))
+    expect(new Chord("CM").containsAllNotes(notes("C", "D", "E")))
         .toEqual(false)
 })
+
+test("scales containing Cm", () => {
+    expect(scalesContaining(notes("C", "Eb", "G")))
+        .toEqual(scales("AbM", "EbM", "BbM", "Fm", "Cm", "Gm"))
+})
+
+test("chords containing C and E", () => {
+    expect(chordsContaining(notes("C", "E")))
+        .toEqual(chords("CM", "Am"))
+})
+
+const scales = (...names: string[]) => names.map(name => new Scale(name))
+const notes = (...names: string[]) => names.map(name => new Note(name))
+const chords = (...names: string[]) => names.map(name => new Chord(name))
