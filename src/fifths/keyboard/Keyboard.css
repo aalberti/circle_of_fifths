@@ -13,24 +13,3 @@
     background: orangered;
     border-radius: 50%
 }
-
-.chordBox {
-    display: flex;
-    flex-flow: row nowrap;
-}
-
-.chordDescriptor {
-    display: flex;
-    flex-flow: column nowrap;
-    font-size: large;
-    text-align: right;
-    width: 70px;
-    padding-top: 10px;
-}
-
-.chordDescriptorSeparator {
-    background-color: white;
-    width: 100%;
-    height: 1px;
-    border: none;
-}

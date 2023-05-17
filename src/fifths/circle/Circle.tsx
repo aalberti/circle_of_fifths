@@ -4,18 +4,16 @@ import {Group, Layer, Stage, Text, Wedge} from "react-konva";
 import {KonvaEventObject} from "konva/lib/Node";
 import {scalesInFifthsOrder} from "../theory/MusicTheory";
 
-interface CircleProps {
-    diameter: number
-    onScaleSelected: (scaleName: string) => void;
-}
-
 interface DynamicSlice {
     name: string
     hover: boolean
     selected: boolean
 }
 
-const Circle: FC<CircleProps> = ({diameter, onScaleSelected}) => {
+const Circle: FC<{
+    diameter: number
+    onScaleSelected: (scaleName: string) => void;
+}> = ({diameter, onScaleSelected}) => {
     const [slices, setSlices] =
         useState<DynamicSlice[]>(initialFifths())
     const onMouseOver = (e: KonvaEventObject<MouseEvent>) => {

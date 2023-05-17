@@ -4,11 +4,7 @@ import "./Keyboard.css"
 import KeyboardPositions from "./KeyboardPositions";
 import {Note} from "../theory/MusicTheory";
 
-interface KeyboardProps {
-    notes: Note[]
-}
-
-const Keyboard: FC<KeyboardProps> = ({notes}) => {
+const Keyboard: FC<{ notes: Note[] }> = ({notes}) => {
     const imageRef = useRef<HTMLImageElement>(null)
     const width = imageRef.current == null ? 300 : imageRef.current.clientWidth
     const height = imageRef.current == null ? 100 : imageRef.current.clientHeight
