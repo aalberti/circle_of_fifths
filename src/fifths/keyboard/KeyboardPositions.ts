@@ -1,4 +1,4 @@
-import {Note} from "../chords/MusicTheory";
+import {Note} from "../theory/MusicTheory";
 
 export interface Position {
     x: number;

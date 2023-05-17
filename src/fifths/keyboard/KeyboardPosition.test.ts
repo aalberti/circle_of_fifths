@@ -1,5 +1,5 @@
 import KeyboardPositions, {Position} from "./KeyboardPositions";
-import {Note} from "../chords/MusicTheory";
+import {Note} from "../theory/MusicTheory";
 
 describe('keyboard positions', () => {
     const positions = new KeyboardPositions(300, 100);

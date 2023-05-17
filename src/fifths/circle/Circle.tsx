@@ -2,7 +2,7 @@ import React, {FC, useState} from "react";
 import './Circle.css'
 import {Group, Layer, Stage, Text, Wedge} from "react-konva";
 import {KonvaEventObject} from "konva/lib/Node";
-import {scalesInFifthsOrder} from "../chords/MusicTheory";
+import {scalesInFifthsOrder} from "../theory/MusicTheory";
 
 interface CircleProps {
     diameter: number

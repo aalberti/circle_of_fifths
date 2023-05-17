@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import './Musicologist.css'
 import Keyboard from "./keyboard/Keyboard";
-import {Scale} from "./chords/MusicTheory";
+import {Scale} from "./theory/MusicTheory";
 
 interface ScaleBoxProps {
     scaleName: string

@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {chordsContaining, Note, scalesContaining} from "../chords/MusicTheory";
+import {chordsContaining, Note, scalesContaining} from "../theory/MusicTheory";
 
 export function Search() {
     const [noteNames, setNoteNames] = useState<string>("")

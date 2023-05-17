@@ -2,7 +2,7 @@ import keyboardImage from "./keyboard_double_octave.png";
 import React, {FC, useRef} from "react";
 import "./Keyboard.css"
 import KeyboardPositions from "./KeyboardPositions";
-import {Note} from "../chords/MusicTheory";
+import {Note} from "../theory/MusicTheory";
 
 interface KeyboardProps {
     notes: Note[]
