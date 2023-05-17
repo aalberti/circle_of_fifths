@@ -1,0 +1,11 @@
+.search {
+    display: flex;
+    flex-flow: row;
+    align-items: flex-start;
+}
+
+.searchResults {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+}

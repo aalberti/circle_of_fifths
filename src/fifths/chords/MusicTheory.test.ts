@@ -162,3 +162,13 @@ test("scales in fifths order", () => {
             ].map(name => new Scale(name))
         )
 })
+
+test("scale contains all notes", () => {
+    expect(new Chord("CM").containsAllNotes([new Note("C"), new Note("E")]))
+        .toEqual(true)
+})
+
+test("scale contains only some notes", () => {
+    expect(new Chord("CM").containsAllNotes([new Note("C"), new Note("D"), new Note("E")]))
+        .toEqual(false)
+})

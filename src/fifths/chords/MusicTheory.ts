@@ -123,6 +123,14 @@ export class Chord {
     isMajor() {
         return this.name.endsWith("M");
     }
+
+    containsAllNotes(notes: Note[]) {
+        return notes
+            .map(note => note.name)
+            .every(note => this.notes()
+                .map(myNote => myNote.name)
+                .includes(note));
+    }
 }
 
 const octave = ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"]

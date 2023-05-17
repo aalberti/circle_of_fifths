@@ -1,8 +1,14 @@
-.musicologist {
+.circleOfFifths {
     display: flex;
     flex-flow: row;
     align-items: stretch;
     max-height: 600px;
+}
+
+.musicologist {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
 }
 
 .chords {
