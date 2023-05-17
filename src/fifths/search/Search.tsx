@@ -2,7 +2,7 @@ import {useState} from "react";
 import './Search.css'
 import {chordsContaining, Note, scalesContaining} from "../theory/MusicTheory";
 import {ChordDetail} from "../chord/ChordDetail";
-import {ScaleSummary} from "../scale/ScaleSummary";
+import ScaleDetail from "../scale/ScaleDetail";
 
 export function Search() {
     const [noteNames, setNoteNames] = useState<string>("")
@@ -26,7 +26,10 @@ export function Search() {
             </div>
             scales:
             <div className="searchResultsList">{scalesContaining(notes())
-                .map(scale => <ScaleSummary scale={scale} key={scale.name}/>)}
+                .map(scale => <ScaleDetail
+                    scale={scale}
+                    filter={scale.chords().filter(chord => chord.containsAllNotes(notes()))}
+                    key={scale.name}/>)}
             </div>
         </div>
     </div>

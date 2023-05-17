@@ -1,16 +1,18 @@
 import React, {FC} from "react";
 import './Scale.css'
-import {Scale} from "../theory/MusicTheory";
+import {Chord, Scale} from "../theory/MusicTheory";
 import {ChordDetail} from "../chord/ChordDetail";
 import {ScaleSummary} from "./ScaleSummary";
 
-const ScaleDetail: FC<{ scale: Scale }> = ({scale}) => {
+const ScaleDetail: FC<{ scale: Scale, filter?: Chord[] }> = ({scale, filter}) => {
     return <div className="scaleBox">
         <ScaleSummary scale={scale}/>
-        <div className="chordsBox" style={{display: "flex"}}>
-            {scale.chords().map((chord, degree) =>
-                <ChordDetail key={chord.name} chord={chord} degree={toRoman(degree)}/>
-            )}
+        <div className="chordsBox">
+            {scale.chords()
+                .filter(chord => !filter || filter.map(c => c.name).includes(chord.name))
+                .map((chord, degree) =>
+                    <ChordDetail key={chord.name} chord={chord} degree={toRoman(degree)}/>
+                )}
         </div>
     </div>
 }
