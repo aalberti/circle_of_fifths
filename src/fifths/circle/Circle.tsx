@@ -2,7 +2,7 @@ import React, {FC, useState} from "react";
 import './Circle.css'
 import {Group, Layer, Stage, Text, Wedge} from "react-konva";
 import {KonvaEventObject} from "konva/lib/Node";
-import {scalesInFifthsOrder} from "../theory/MusicTheory";
+import {Scale, scalesInFifthsOrder} from "../theory/MusicTheory";
 
 interface DynamicSlice {
     name: string
@@ -12,7 +12,7 @@ interface DynamicSlice {
 
 const Circle: FC<{
     diameter: number
-    onScaleSelected: (scaleName: string) => void;
+    onScaleSelected: (scale: Scale) => void;
 }> = ({diameter, onScaleSelected}) => {
     const [slices, setSlices] =
         useState<DynamicSlice[]>(initialFifths())
@@ -35,7 +35,7 @@ const Circle: FC<{
             ...slice,
             selected: (name === slice.name)
         })))
-        onScaleSelected(name)
+        onScaleSelected(new Scale(name))
     }
 
     return <div className="circle">

@@ -4,11 +4,10 @@ import Keyboard from "../keyboard/Keyboard";
 import {Scale} from "../theory/MusicTheory";
 import {ChordDetail} from "../chord/ChordDetail";
 
-const ScaleDetail: FC<{ scaleName: string }> = ({scaleName}) => {
-    const scale = new Scale(scaleName);
+const ScaleDetail: FC<{ scale: Scale }> = ({scale}) => {
     return <div className="scaleBox">
         <div className="scaleDescriptor">
-            <div className="scaleName">{scaleName}</div>
+            <div className="scaleName">{scale.name}</div>
             <Keyboard notes={scale.notesOn2Octaves()}/>
         </div>
         <div className="chordsBox" style={{display: "flex"}}>

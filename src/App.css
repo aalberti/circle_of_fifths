@@ -1,7 +1,4 @@
 .App {
-}
-
-.App-header {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -9,10 +6,4 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.pie {
-  height: 500px;
-  width: 500px;
-  background: white;
 }
