@@ -24,7 +24,7 @@ export function Search() {
 }
 
 function chords(input: { notes: Note[]; chords: Chord[] }) {
-    const chords = chordsContaining(input.notes);
+    const chords = chordsContaining(input.notes).concat(input.chords);
     return chords && chords.length > 0 ? <div>
         chords:
         <div className="searchResultsList">
