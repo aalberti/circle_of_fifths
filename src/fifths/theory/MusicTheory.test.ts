@@ -182,6 +182,11 @@ test("scale contains only some notes", () => {
         .toEqual(false)
 })
 
+test("scales containing nothing", () => {
+    expect(scalesContaining([]))
+        .toEqual([])
+})
+
 test("scales containing Cm", () => {
     expect(scalesContaining(notes("C", "Eb", "G")))
         .toEqual(scales("AbM", "EbM", "BbM", "Fm", "Cm", "Gm"))
@@ -190,6 +195,11 @@ test("scales containing Cm", () => {
 test("chords containing C and E", () => {
     expect(chordsContaining(notes("C", "E")))
         .toEqual(chords("CM", "Am"))
+})
+
+test("chords containing nothing", () => {
+    expect(chordsContaining([]))
+        .toEqual([])
 })
 
 const scales = (...names: string[]) => names.map(name => new Scale(name))

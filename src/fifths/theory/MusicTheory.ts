@@ -127,7 +127,7 @@ export class Chord {
     }
 
     containsAllNotes(notes: Note[]) {
-        return notes
+        return notes && notes.length > 0 && notes
             .map(note => note.name)
             .every(note => this.notes()
                 .map(myNote => myNote.name)

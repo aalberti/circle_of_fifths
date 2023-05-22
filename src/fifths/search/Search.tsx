@@ -25,7 +25,7 @@ export function Search() {
 
 function chords(input: { notes: Note[]; chords: Chord[] }) {
     const chords = chordsContaining(input.notes);
-    return chords ? <div>
+    return chords && chords.length > 0 ? <div>
         chords:
         <div className="searchResultsList">
             {chords
@@ -38,7 +38,7 @@ function chords(input: { notes: Note[]; chords: Chord[] }) {
 
 function scales(input: { notes: Note[]; chords: Chord[] }) {
     const scales = scalesContaining(input.notes);
-    return scales ? <div>
+    return scales && scales.length > 0 ? <div>
         scales:
         <div className="searchResultsList">{scales
             .map(scale => <ScaleDetail
