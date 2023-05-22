@@ -49,6 +49,11 @@ export class Scale {
         return notesOn1Octave.concat(notesOn1Octave);
     }
 
+    containsAllChords(chords: Chord[]): boolean {
+        return chords.every(required => this.chords()
+            .some(chord => required.name === chord.name))
+    }
+
     private degreeI() {
         return new Chord(this.name);
     }
@@ -127,11 +132,11 @@ export class Chord {
     }
 
     containsAllNotes(notes: Note[]) {
-        return notes && notes.length > 0 && notes
-            .map(note => note.name)
-            .every(note => this.notes()
-                .map(myNote => myNote.name)
-                .includes(note));
+        return notes
+                .map(note => note.name)
+                .every(note => this.notes()
+                    .map(myNote => myNote.name)
+                    .includes(note));
     }
 }
 
@@ -175,10 +180,11 @@ export function sortInOctave(notes: Note[]) {
     return notes.sort((a, b) => a.isLowerThanInOctave(b) ? -1 : 1)
 }
 
-export function scalesContaining(notes: Note[]) {
+export function scalesContaining(notes: Note[], chords: Chord[]) {
     return scalesInFifthsOrder()
-        .filter(scale => scale.chords()
-            .some(chord => chord.containsAllNotes(notes)));
+        .filter(scale => (isNotEmpty(chords) || isNotEmpty(notes))
+            && (isFalsyOrEmpty(chords) || scale.containsAllChords(chords))
+            && (isFalsyOrEmpty(notes) || scale.chords().some(chord => chord.containsAllNotes(notes))));
 }
 
 function distinct<T>(array: T[]): T[] {
@@ -196,5 +202,13 @@ export function chordsContaining(notes: Note[]) {
     const allChords = distinct(scalesInFifthsOrder()
         .flatMap(scale => scale.chords()));
     return allChords
-        .filter(chord => chord.containsAllNotes(notes));
+        .filter(chord => isNotEmpty(notes) && chord.containsAllNotes(notes));
+}
+
+function isFalsyOrEmpty<T>(items: T[]) {
+    return !items || items.length == 0;
+}
+
+function isNotEmpty<T>(items: T[]) {
+    return !isFalsyOrEmpty(items);
 }

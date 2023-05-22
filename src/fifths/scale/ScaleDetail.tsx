@@ -9,9 +9,10 @@ const ScaleDetail: FC<{ scale: Scale, filter?: Chord[] }> = ({scale, filter}) =>
         <ScaleSummary scale={scale}/>
         <div className="chordsBox">
             {scale.chords()
-                .filter(chord => !filter || filter.map(c => c.name).includes(chord.name))
-                .map((chord, degree) =>
-                    <ChordDetail key={chord.name} chord={chord} degree={toRoman(degree)}/>
+                .map((chord, degree) => ({chord: chord, degree: degree}))
+                .filter(chord => !filter || filter.map(c => c.name).includes(chord.chord.name))
+                .map(chord =>
+                    <ChordDetail key={chord.chord.name} chord={chord.chord} degree={toRoman(chord.degree)}/>
                 )}
         </div>
     </div>

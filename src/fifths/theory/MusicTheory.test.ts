@@ -172,24 +172,44 @@ test("scales in fifths order", () => {
             "Am", "Em", "Bm", "F#m", "C#m", "Abm", "Ebm", "Bbm", "Fm", "Cm", "Gm", "Dm"))
 })
 
-test("scale contains all notes", () => {
+test("chord contains all notes", () => {
     expect(new Chord("CM").containsAllNotes(notes("C", "E")))
         .toEqual(true)
 })
 
-test("scale contains only some notes", () => {
+test("chord contains only some notes", () => {
     expect(new Chord("CM").containsAllNotes(notes("C", "D", "E")))
         .toEqual(false)
 })
 
+test("scale Cm contain Ddim and EbM", () => {
+    expect(new Scale("Cm").containsAllChords(chords("Ddim", "EbM")))
+        .toEqual(true)
+})
+
+test("scale Cm doesn't contain CM", () => {
+    expect(new Scale("Cm").containsAllChords(chords("CM", "Ddim", "EbM")))
+        .toEqual(false)
+})
+
 test("scales containing nothing", () => {
-    expect(scalesContaining([]))
+    expect(scalesContaining([], []))
         .toEqual([])
 })
 
-test("scales containing Cm", () => {
-    expect(scalesContaining(notes("C", "Eb", "G")))
+test("scales containing Cm notes", () => {
+    expect(scalesContaining(notes("C", "Eb", "G"), []))
         .toEqual(scales("AbM", "EbM", "BbM", "Fm", "Cm", "Gm"))
+})
+
+test("scales containing chords and notes", () => {
+    expect(scalesContaining(notes("C", "Eb", "G"), chords("Ddim", "EbM")))
+        .toEqual(scales("EbM", "Cm"))
+})
+
+test("scales containing chords", () => {
+    expect(scalesContaining([], chords("Ddim", "EbM")))
+        .toEqual(scales("EbM", "Cm"))
 })
 
 test("chords containing C and E", () => {
