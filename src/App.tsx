@@ -4,8 +4,8 @@ import {Musicologist} from "./fifths/Musicologist";
 
 function App() {
     return <div className="App">
-            <Musicologist/>
-    </div>;
+        <Musicologist/>
+    </div>
 }
 
 export default App;

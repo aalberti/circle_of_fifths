@@ -16,7 +16,7 @@ export function Search() {
                 <input onChange={e => setInput(e.target.value)}/>
             </label>
         </div>
-        <div className="searchResults">
+        <div>
             {chords(parsedInput())}
             {scales(parsedInput())}
         </div>
@@ -25,8 +25,10 @@ export function Search() {
 
 function chords(input: { notes: Note[]; chords: Chord[] }) {
     const chords = chordsContaining(input.notes).concat(input.chords);
-    return chords && chords.length > 0 ? <div>
-        chords:
+    return chords && chords.length > 0 ? <div className="searchResults">
+        <div className="searchResultTitle">
+            chords
+        </div>
         <div className="searchResultsList">
             {chords
                 .map(chord =>
@@ -38,8 +40,10 @@ function chords(input: { notes: Note[]; chords: Chord[] }) {
 
 function scales(input: { notes: Note[]; chords: Chord[] }) {
     const scales = scalesContaining(input.notes, input.chords);
-    return scales && scales.length > 0 ? <div>
-        scales:
+    return scales && scales.length > 0 ? <div className="searchResults">
+        <div className="searchResultTitle">
+            scales
+        </div>
         <div className="searchResultsList">{scales
             .map(scale => <ScaleDetail
                 scale={scale}

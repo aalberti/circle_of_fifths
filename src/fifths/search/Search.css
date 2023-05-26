@@ -10,10 +10,17 @@
     flex-flow: row;
 }
 
+.searchResultTitle {
+    width: 100%;
+    font-size: xx-large;
+    border-top: 1px solid var(--bs-secondary);
+    border-bottom: 1px solid var(--bs-secondary);
+}
 .searchResults {
     display: flex;
     flex-flow: column;
     align-items: flex-start;
+    width: 100%;
 }
 
 .searchResultsList {

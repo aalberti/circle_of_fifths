@@ -10,6 +10,7 @@
     text-align: right;
     padding-right: 15px;
     padding-top: 20px;
+    font-size: x-large;
 }
 
 .scaleDescriptor {
@@ -22,5 +23,5 @@
 .chordsBox {
     display: flex;
     flex-flow: column wrap;
-    border-left: white solid 1px;
+    border-left:  var(--bs-secondary) solid 1px;
 }
