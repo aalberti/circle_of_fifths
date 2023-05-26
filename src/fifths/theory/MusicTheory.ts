@@ -206,7 +206,7 @@ export function chordsContaining(notes: Note[]) {
 }
 
 function isFalsyOrEmpty<T>(items: T[]) {
-    return !items || items.length == 0;
+    return !items || items.length === 0;
 }
 
 function isNotEmpty<T>(items: T[]) {
