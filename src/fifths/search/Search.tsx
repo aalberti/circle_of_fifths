@@ -40,15 +40,17 @@ function chords(input: { notes: Note[]; chords: Chord[] }) {
 
 function scales(input: { notes: Note[]; chords: Chord[] }) {
     const scales = scalesContaining(input.notes, input.chords);
-    return scales && scales.length > 0 ? <div className="searchResults">
-        <div className="searchResultTitle">
-            scales
+    return scales && scales.length > 0
+        ? <div className="searchResults">
+            <div className="searchResultTitle">
+                scales
+            </div>
+            <div className="searchResultsList">{scales
+                .map(scale => <ScaleDetail
+                    scale={scale}
+                    filter={scale.chords().filter(chord => chord.containsAllNotes(input.notes)).concat(input.chords)}
+                    key={scale.name}/>)}
+            </div>
         </div>
-        <div className="searchResultsList">{scales
-            .map(scale => <ScaleDetail
-                scale={scale}
-                filter={scale.chords().filter(chord => chord.containsAllNotes(input.notes)).concat(input.chords)}
-                key={scale.name}/>)}
-        </div>
-    </div> : <div/>;
+        : <div/>;
 }
