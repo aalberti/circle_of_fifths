@@ -1,10 +1,8 @@
 import React, {useState} from "react";
-import Circle from "./circle/Circle";
 import './Musicologist.css'
-import ScaleDetail from "./scale/ScaleDetail";
 import {Search} from "./search/Search";
-import {Scale} from "./theory/MusicTheory";
 import {ToggleButton, ToggleButtonGroup} from "react-bootstrap";
+import {CircleOfFifths} from "./circleOfFiths/CircleOfFifths";
 
 enum Screen {
     Circle,
@@ -12,7 +10,6 @@ enum Screen {
 }
 
 export const Musicologist = () => {
-    const [scale, setScale] = useState<Scale | null>(null);
     const [currentScreen, setCurrentScreen] = useState<Screen>(Screen.Circle)
 
     return <div className="musicologist">
@@ -21,10 +18,7 @@ export const Musicologist = () => {
             <ToggleButton variant="dark" id="navigateToSearch" value={Screen.Search}>Search</ToggleButton>
         </ToggleButtonGroup>
         {currentScreen == Screen.Circle
-            ? <div className="circleOfFifths">
-                <Circle diameter={500} onScaleSelected={setScale}/>
-                {scale ? <ScaleDetail scale={scale}/> : null}
-            </div>
+            ? <CircleOfFifths/>
             : <Search/>
         }
     </div>

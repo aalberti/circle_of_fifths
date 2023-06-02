@@ -12,10 +12,11 @@ interface DynamicSlice {
 
 const Circle: FC<{
     diameter: number
-    onScaleSelected: (scale: Scale) => void;
-}> = ({diameter, onScaleSelected}) => {
+    onScaleSelected: (scale: Scale) => void
+    selection: Scale | null
+}> = ({diameter, onScaleSelected, selection}) => {
     const [slices, setSlices] =
-        useState<DynamicSlice[]>(initialFifths())
+        useState<DynamicSlice[]>(initialFifths(selection))
     const onMouseOver = (e: KonvaEventObject<MouseEvent>) => {
         setSlices(slices.map(slice => ({
             ...slice,
@@ -45,13 +46,13 @@ const Circle: FC<{
         </Stage></div>
 }
 
-function initialFifths() {
+function initialFifths(selection: Scale | null) {
     return scalesInFifthsOrder()
         .map(scale => scale.name)
         .map(name => ({
             name: name,
             hover: false,
-            selected: false
+            selected: name === selection?.name
         }))
 }
 
