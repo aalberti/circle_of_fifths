@@ -1,7 +1,8 @@
 import Circle from "../circle/Circle";
 import ScaleDetail from "../scale/ScaleDetail";
 import React from "react";
-import {selectedScale, setSelectedScale, useAppDispatch, useAppSelector} from "../../store";
+import {useAppDispatch, useAppSelector} from "../../store";
+import {selectedScale, setSelectedScale} from "./fifthsReducer";
 
 export const CircleOfFifths = () => {
     const dispatch = useAppDispatch()

@@ -3,7 +3,8 @@ import {Chord, chordsContaining, Note, scalesContaining} from "../theory/MusicTh
 import {ChordDetail} from "../chord/ChordDetail";
 import ScaleDetail from "../scale/ScaleDetail";
 import {parseInput} from "./InputParser";
-import {changeSearch, currentSearch, useAppDispatch, useAppSelector} from "../../store";
+import {useAppDispatch, useAppSelector} from "../../store";
+import {changeSearch, currentSearch} from "./searchReducer";
 
 export function Search() {
     const dispatch = useAppDispatch()
