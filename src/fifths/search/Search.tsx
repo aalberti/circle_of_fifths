@@ -1,19 +1,22 @@
-import {useState} from "react";
 import './Search.css'
 import {Chord, chordsContaining, Note, scalesContaining} from "../theory/MusicTheory";
 import {ChordDetail} from "../chord/ChordDetail";
 import ScaleDetail from "../scale/ScaleDetail";
 import {parseInput} from "./InputParser";
+import {changeSearch, currentSearch, useAppDispatch, useAppSelector} from "../../store";
 
 export function Search() {
-    const [input, setInput] = useState<string>("")
-    const parsedInput = () => parseInput(input);
+    const dispatch = useAppDispatch()
+    const search = useAppSelector(currentSearch)
+    const parsedInput = () => parseInput(search);
 
     return <div className="search">
         <div className="searchInput">
             <label>
                 choose notes
-                <input onChange={e => setInput(e.target.value)}/>
+                <input value={search} onChange={e => {
+                    dispatch(changeSearch(e.target.value))
+                }}/>
             </label>
         </div>
         <div>
