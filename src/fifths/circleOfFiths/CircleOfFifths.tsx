@@ -8,7 +8,7 @@ export const CircleOfFifths = () => {
     const dispatch = useAppDispatch()
     const currentScale = useAppSelector(selectedScale)
     return <div className="circleOfFifths">
-        <Circle diameter={500} onScaleSelected={scale => dispatch(setSelectedScale(scale))} selection={currentScale}/>
+        <Circle diameter={500} onScaleSelected={scale => dispatch(setSelectedScale(scale.name))} selection={currentScale}/>
         {currentScale ? <ScaleDetail scale={currentScale}/> : null}
     </div>
 }
