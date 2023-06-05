@@ -182,6 +182,11 @@ test("chord contains only some notes", () => {
         .toEqual(false)
 })
 
+test("chord containing no note", () => {
+    expect(new Chord("CM").containsAllNotes([]))
+        .toEqual(false)
+})
+
 test("scale Cm contain Ddim and EbM", () => {
     expect(new Scale("Cm").containsAllChords(chords("Ddim", "EbM")))
         .toEqual(true)

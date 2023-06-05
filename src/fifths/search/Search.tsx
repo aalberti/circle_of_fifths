@@ -52,7 +52,9 @@ function scales(input: { notes: Note[]; chords: Chord[] }) {
             <div className="searchResultsList">{scales
                 .map(scale => <ScaleDetail
                     scale={scale}
-                    filter={scale.chords().filter(chord => chord.containsAllNotes(input.notes)).concat(input.chords)}
+                    filter={scale.chords()
+                        .filter(chord => chord.containsAllNotes(input.notes))
+                        .concat(input.chords)}
                     key={scale.name}/>)}
             </div>
         </div>

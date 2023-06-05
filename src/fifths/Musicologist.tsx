@@ -17,7 +17,7 @@ export const Musicologist = () => {
             <ToggleButton variant="dark" id="navigateToCircle" value={Screen.Circle}>Circle</ToggleButton>
             <ToggleButton variant="dark" id="navigateToSearch" value={Screen.Search}>Search</ToggleButton>
         </ToggleButtonGroup>
-        {currentScreen == Screen.Circle
+        {currentScreen === Screen.Circle
             ? <CircleOfFifths/>
             : <Search/>
         }

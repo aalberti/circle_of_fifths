@@ -132,7 +132,7 @@ export class Chord {
     }
 
     containsAllNotes(notes: Note[]) {
-        return notes
+        return isNotEmpty(notes) && notes
                 .map(note => note.name)
                 .every(note => this.notes()
                     .map(myNote => myNote.name)
@@ -202,7 +202,7 @@ export function chordsContaining(notes: Note[]) {
     const allChords = distinct(scalesInFifthsOrder()
         .flatMap(scale => scale.chords()));
     return allChords
-        .filter(chord => isNotEmpty(notes) && chord.containsAllNotes(notes));
+        .filter(chord => chord.containsAllNotes(notes));
 }
 
 function isFalsyOrEmpty<T>(items: T[]) {
