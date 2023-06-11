@@ -138,6 +138,47 @@ test.each([
 });
 
 test.each([
+    ["CM", ["C", "E", "G", "C", "E", "G"]],
+    ["C#M", ["C#", "F", "Ab", "C#", "F", "Ab"]],
+    ["DM", ["D", "F#", "A", "D", "F#", "A"]],
+    ["EbM", ["Eb", "G", "Bb", "Eb", "G", "Bb"]],
+    ["EM", ["E", "Ab", "B", "E", "Ab", "B"]],
+    ["FM", ["C", "F", "A", "C", "F", "A"]],
+    ["F#M", ["C#", "F#", "Bb", "C#", "F#", "Bb"]],
+    ["GM", ["D", "G", "B", "D", "G", "B"]],
+    ["AbM", ["C", "Eb", "Ab", "C", "Eb", "Ab"]],
+    ["AM", ["C#", "E", "A", "C#", "E", "A"]],
+    ["BM", ["Eb", "F#", "B", "Eb", "F#", "B"]],
+    ["BbM", ["D", "F", "Bb", "D", "F", "Bb"]],
+    ["Cm", ["C", "Eb", "G", "C", "Eb", "G"]],
+    ["C#m", ["C#", "E", "Ab", "C#", "E", "Ab"]],
+    ["Dm", ["D", "F", "A", "D", "F", "A"]],
+    ["Ebm", ["Eb", "F#", "Bb", "Eb", "F#", "Bb"]],
+    ["Em", ["E", "G", "B", "E", "G", "B"]],
+    ["Fm", ["C", "F", "Ab", "C", "F", "Ab"]],
+    ["F#m", ["C#", "F#", "A", "C#", "F#", "A"]],
+    ["Gm", ["D", "G", "Bb", "D", "G", "Bb"]],
+    ["Abm", ["Eb", "Ab", "B", "Eb", "Ab", "B"]],
+    ["Am", ["C", "E", "A", "C", "E", "A"]],
+    ["Bbm", ["C#", "F", "Bb", "C#", "F", "Bb"]],
+    ["Bm", ["D", "F#", "B", "D", "F#", "B"]],
+    ["Cdim", ["C", "Eb", "F#", "C", "Eb", "F#"]],
+    ["C#dim", ["C#", "E", "G", "C#", "E", "G"]],
+    ["Ddim", ["D", "F", "Ab", "D", "F", "Ab"]],
+    ["Ebdim", ["Eb", "F#", "A", "Eb", "F#", "A"]],
+    ["Edim", ["E", "G", "Bb", "E", "G", "Bb"]],
+    ["Fdim", ["F", "Ab", "B", "F", "Ab", "B"]],
+    ["F#dim", ["C", "F#", "A", "C", "F#", "A"]],
+    ["Gdim", ["C#", "G", "Bb", "C#", "G", "Bb"]],
+    ["Abdim", ["D", "Ab", "B", "D", "Ab", "B"]],
+    ["Adim", ["C", "Eb", "A", "C", "Eb", "A"]],
+    ["Bbdim", ["C#", "E", "Bb", "C#", "E", "Bb"]],
+    ["Bdim", ["D", "F", "B", "D", "F", "B"]],
+])("Chord %s has notes on 2 octaves %s", (chordName, noteNames) => {
+    expect(new Chord(chordName).notesOn2Octaves()).toEqual(notes(...noteNames))
+});
+
+test.each([
     "CM", "C#M", "DM", "EbM", "EM", "FM", "F#M", "GM", "AbM", "AM", "BbM", "BM",
     "Cm", "C#m", "Dm", "Ebm", "Em", "Fm", "F#m", "Gm", "Abm", "Am", "Bbm", "Bm"
 ])("Chords map notes for scale %s", (scaleName) => {

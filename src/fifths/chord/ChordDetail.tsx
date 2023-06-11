@@ -14,5 +14,5 @@ export const ChordDetail: FC<{ chord: Chord; degree?: string; }> = ({chord, degr
                 </div>
                 : ""}
         </div>
-        <Keyboard notes={chord.notes()}/>
+        <Keyboard notes={chord.notesOn2Octaves()}/>
     </div>;

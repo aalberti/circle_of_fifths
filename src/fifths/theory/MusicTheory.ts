@@ -45,8 +45,7 @@ export class Scale {
     }
 
     notesOn2Octaves(): Note[] {
-        const notesOn1Octave = sortInOctave(this.notes())
-        return notesOn1Octave.concat(notesOn1Octave);
+        return repeatOver2Octaves(this.notes());
     }
 
     containsAllChords(chords: Chord[]): boolean {
@@ -138,6 +137,10 @@ export class Chord {
                     .map(myNote => myNote.name)
                     .includes(note));
     }
+
+    notesOn2Octaves() {
+        return repeatOver2Octaves(this.notes());
+    }
 }
 
 const octave = ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"]
@@ -174,6 +177,11 @@ export class Note {
     isLowerThanInOctave(other: Note): boolean {
         return octave.indexOf(this.name) < octave.indexOf(other.name)
     }
+}
+
+function repeatOver2Octaves(notes: Note[]) {
+    const notesOn1Octave = sortInOctave(notes)
+    return notesOn1Octave.concat(notesOn1Octave);
 }
 
 export function sortInOctave(notes: Note[]) {
