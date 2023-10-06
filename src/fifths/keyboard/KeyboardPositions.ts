@@ -1,4 +1,4 @@
-import {Note} from "../theory/MusicTheory";
+import {Chroma} from "../theory/MusicTheory";
 
 export interface Position {
     x: number;
@@ -11,7 +11,7 @@ class KeyboardPositions {
         public readonly keyboardHeight: number) {
     }
 
-    keysPositions = (notes: Note[]) => this.onOctaves(notes)
+    keysPositions = (chromas: Chroma[]) => this.onOctaves(chromas)
         .map(({key, octave}) => this.keyPosition(key, octave));
 
     static keys = ["C", "C#", "D", "Eb", "E", "", "F", "F#", "G", "Ab", "A", "Bb", "B"]
@@ -26,15 +26,15 @@ class KeyboardPositions {
         return {x: x, y: y}
     };
 
-    onOctaves = (notes: Note[]): { key: string, octave: number }[] => {
+    onOctaves = (chromas: Chroma[]): { key: string, octave: number }[] => {
         let currentOctave = 0;
         let lastKeyIndex = -1;
         let result = []
-        for (const note of notes) {
-            const keyIndex = KeyboardPositions.keys.indexOf(note.name);
+        for (const chroma of chromas) {
+            const keyIndex = KeyboardPositions.keys.indexOf(chroma.name);
             if (keyIndex <= lastKeyIndex)
                 currentOctave++;
-            result.push({key: note.name, octave: currentOctave});
+            result.push({key: chroma.name, octave: currentOctave});
             lastKeyIndex = keyIndex;
         }
         return result;

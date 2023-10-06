@@ -1,7 +1,7 @@
 import {
     Chord,
     chordsContaining,
-    Note,
+    Chroma,
     Scale,
     scalesContaining,
     scalesInFifthsOrder,
@@ -46,8 +46,8 @@ test.each([
     ["Adim", ["A", "C", "Eb"]],
     ["Bbdim", ["Bb", "C#", "E"]],
     ["Bdim", ["B", "D", "F"]],
-])("Chord %s is made up of %s", (chordName, noteNames) => {
-    expect(new Chord(chordName).notes()).toEqual(notes(...noteNames))
+])("Chord %s is made up of %s", (chordName, chromaNames) => {
+    expect(new Chord(chordName).chromas()).toEqual(chromas(...chromaNames))
 })
 
 test.each([
@@ -104,8 +104,8 @@ test.each([
     ["Am", ["A", "B", "C", "D", "E", "F", "G"]],
     ["Bbm", ["Bb", "C", "C#", "Eb", "F", "F#", "Ab"]],
     ["Bm", ["B", "C#", "D", "E", "F#", "G", "A"]],
-])("Scale %s has notes %s", (scaleName, noteNames) => {
-    expect(new Scale(scaleName).notes()).toEqual(notes(...noteNames))
+])("Scale %s has chromas %s", (scaleName, chromaNames) => {
+    expect(new Scale(scaleName).chromas()).toEqual(chromas(...chromaNames))
 });
 
 test.each([
@@ -134,7 +134,7 @@ test.each([
     ["Bbm", ["C", "C#", "Eb", "F", "F#", "Ab", "Bb", "C", "C#", "Eb", "F", "F#", "Ab", "Bb"]],
     ["Bm", ["C#", "D", "E", "F#", "G", "A", "B", "C#", "D", "E", "F#", "G", "A", "B"]],
 ])("Scale %s has notes on 2 octaves %s", (scaleName, noteNames) => {
-    expect(new Scale(scaleName).notesOn2Octaves()).toEqual(notes(...noteNames))
+    expect(new Scale(scaleName).notesOn2Octaves()).toEqual(chromas(...noteNames))
 });
 
 test.each([
@@ -175,16 +175,16 @@ test.each([
     ["Bbdim", ["C#", "E", "Bb", "C#", "E", "Bb"]],
     ["Bdim", ["D", "F", "B", "D", "F", "B"]],
 ])("Chord %s has notes on 2 octaves %s", (chordName, noteNames) => {
-    expect(new Chord(chordName).notesOn2Octaves()).toEqual(notes(...noteNames))
+    expect(new Chord(chordName).notesOn2Octaves()).toEqual(chromas(...noteNames))
 });
 
 test.each([
     "CM", "C#M", "DM", "EbM", "EM", "FM", "F#M", "GM", "AbM", "AM", "BbM", "BM",
     "Cm", "C#m", "Dm", "Ebm", "Em", "Fm", "F#m", "Gm", "Abm", "Am", "Bbm", "Bm"
-])("Chords map notes for scale %s", (scaleName) => {
+])("Chords map chromas for scale %s", (scaleName) => {
     const scale = new Scale(scaleName);
-    const notes = scale.chords().flatMap(chord => chord.notes());
-    expect(sortInOctave(scale.notes())).toStrictEqual(sortInOctave(distinct(notes)));
+    const chromas = scale.chords().flatMap(chord => chord.chromas());
+    expect(sortInOctave(scale.chromas())).toStrictEqual(sortInOctave(distinct(chromas)));
 })
 
 function distinct<T>(array: T[]): T[] {
@@ -201,9 +201,9 @@ function distinct<T>(array: T[]): T[] {
 test("sort", () => {
     expect(
         sortInOctave(
-            notes("A", "B", "C", "D", "E", "F", "G")))
+            chromas("A", "B", "C", "D", "E", "F", "G")))
         .toEqual(
-            notes("C", "D", "E", "F", "G", "A", "B"))
+            chromas("C", "D", "E", "F", "G", "A", "B"))
 })
 
 test("scales in fifths order", () => {
@@ -213,18 +213,18 @@ test("scales in fifths order", () => {
             "Am", "Em", "Bm", "F#m", "C#m", "Abm", "Ebm", "Bbm", "Fm", "Cm", "Gm", "Dm"))
 })
 
-test("chord contains all notes", () => {
-    expect(new Chord("CM").containsAllNotes(notes("C", "E")))
+test("chord contains all chromas", () => {
+    expect(new Chord("CM").containsAllChromas(chromas("C", "E")))
         .toEqual(true)
 })
 
-test("chord contains only some notes", () => {
-    expect(new Chord("CM").containsAllNotes(notes("C", "D", "E")))
+test("chord contains only some chromas", () => {
+    expect(new Chord("CM").containsAllChromas(chromas("C", "D", "E")))
         .toEqual(false)
 })
 
-test("chord containing no note", () => {
-    expect(new Chord("CM").containsAllNotes([]))
+test("chord containing no chroma", () => {
+    expect(new Chord("CM").containsAllChromas([]))
         .toEqual(false)
 })
 
@@ -243,13 +243,13 @@ test("scales containing nothing", () => {
         .toEqual([])
 })
 
-test("scales containing Cm notes", () => {
-    expect(scalesContaining(notes("C", "Eb", "G"), []))
+test("scales containing Cm chromas", () => {
+    expect(scalesContaining(chromas("C", "Eb", "G"), []))
         .toEqual(scales("AbM", "EbM", "BbM", "Fm", "Cm", "Gm"))
 })
 
-test("scales containing chords and notes", () => {
-    expect(scalesContaining(notes("C", "Eb", "G"), chords("Ddim", "EbM")))
+test("scales containing chords and chromas", () => {
+    expect(scalesContaining(chromas("C", "Eb", "G"), chords("Ddim", "EbM")))
         .toEqual(scales("EbM", "Cm"))
 })
 
@@ -259,7 +259,7 @@ test("scales containing chords", () => {
 })
 
 test("chords containing C and E", () => {
-    expect(chordsContaining(notes("C", "E")))
+    expect(chordsContaining(chromas("C", "E")))
         .toEqual(chords("CM", "Am"))
 })
 
@@ -269,5 +269,5 @@ test("chords containing nothing", () => {
 })
 
 const scales = (...names: string[]) => names.map(name => new Scale(name))
-const notes = (...names: string[]) => names.map(name => new Note(name))
+const chromas = (...names: string[]) => names.map(name => new Chroma(name))
 const chords = (...names: string[]) => names.map(name => new Chord(name))

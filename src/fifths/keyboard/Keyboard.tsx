@@ -2,17 +2,17 @@ import keyboardImage from "./keyboard_double_octave.png";
 import React, {FC, useRef} from "react";
 import "./Keyboard.css"
 import KeyboardPositions from "./KeyboardPositions";
-import {Note} from "../theory/MusicTheory";
+import {Chroma} from "../theory/MusicTheory";
 
-const Keyboard: FC<{ notes: Note[] }> = ({notes}) => {
+const Keyboard: FC<{ chromas: Chroma[] }> = ({chromas}) => {
     const imageRef = useRef<HTMLImageElement>(null)
     const width = imageRef.current == null ? 300 : imageRef.current.clientWidth
     const height = imageRef.current == null ? 100 : imageRef.current.clientHeight
     const keyboard = new KeyboardPositions(width, height);
     return <div className="keyboardContainer">
         <div style={{position: "relative"}}>
-            <img ref={imageRef} className="keyboardImage" src={keyboardImage} alt={`${notes} on keyboard`}/>
-            {keyboard.keysPositions(notes)
+            <img ref={imageRef} className="keyboardImage" src={keyboardImage} alt={`${chromas} on keyboard`}/>
+            {keyboard.keysPositions(chromas)
                 .map(({x, y}) => <div key={`(${x}, ${y})`} className="keyPressed" style={{
                     transform: "translate(-50%, -50%)",
                     position: "absolute",

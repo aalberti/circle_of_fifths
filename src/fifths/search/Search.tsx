@@ -1,5 +1,5 @@
 import './Search.css'
-import {Chord, chordsContaining, Note, scalesContaining} from "../theory/MusicTheory";
+import {Chord, chordsContaining, Chroma, scalesContaining} from "../theory/MusicTheory";
 import {ChordDetail} from "../chord/ChordDetail";
 import ScaleDetail from "../scale/ScaleDetail";
 import {parseInput} from "./InputParser";
@@ -14,7 +14,7 @@ export function Search() {
     return <div className="search">
         <div className="searchInput">
             <label>
-                choose notes
+                What do you want?
                 <input value={search} onChange={e => {
                     dispatch(changeSearch(e.target.value))
                 }}/>
@@ -27,8 +27,8 @@ export function Search() {
     </div>
 }
 
-function chords(input: { notes: Note[]; chords: Chord[] }) {
-    const chords = chordsContaining(input.notes).concat(input.chords);
+function chords(input: { chromas: Chroma[]; chords: Chord[] }) {
+    const chords = chordsContaining(input.chromas).concat(input.chords);
     return chords && chords.length > 0 ? <div className="searchResults">
         <div className="searchResultTitle">
             chords
@@ -42,8 +42,8 @@ function chords(input: { notes: Note[]; chords: Chord[] }) {
     </div> : <div/>;
 }
 
-function scales(input: { notes: Note[]; chords: Chord[] }) {
-    const scales = scalesContaining(input.notes, input.chords);
+function scales(input: { chromas: Chroma[]; chords: Chord[] }) {
+    const scales = scalesContaining(input.chromas, input.chords);
     return scales && scales.length > 0
         ? <div className="searchResults">
             <div className="searchResultTitle">
@@ -53,7 +53,7 @@ function scales(input: { notes: Note[]; chords: Chord[] }) {
                 .map(scale => <ScaleDetail
                     scale={scale}
                     filter={scale.chords()
-                        .filter(chord => chord.containsAllNotes(input.notes))
+                        .filter(chord => chord.containsAllChromas(input.chromas))
                         .concat(input.chords)}
                     key={scale.name}/>)}
             </div>

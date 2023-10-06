@@ -6,20 +6,20 @@ export function scalesInFifthsOrder() {
 
 export function majorScales() {
     return new Array(12).fill("")
-        .map((_, i) => new Note("C").plusSemitones(7 * i))
-        .map(note => note.name + "M")
+        .map((_, i) => new Chroma("C").plusSemitones(7 * i))
+        .map(chroma => chroma.name + "M")
         .map(name => new Scale(name));
 }
 
 export function minorScales() {
     return new Array(12).fill("")
-        .map((_, i) => new Note("A").plusSemitones(7 * i))
-        .map(note => note.name + "m")
+        .map((_, i) => new Chroma("A").plusSemitones(7 * i))
+        .map(chroma => chroma.name + "m")
         .map(name => new Scale(name));
 }
 
 interface ChordGenerator {
-    base: Note
+    base: Chroma
     semitonesOffset: number
     modifier: string
 }
@@ -37,15 +37,15 @@ export class Scale {
             .map(generator => this.toChord(generator))
     }
 
-    notes(): Note[] {
+    chromas(): Chroma[] {
         if (this.degreeI().isMajor())
             return [0, 2, 4, 5, 7, 9, 11].map(offset => this.degreeI().root().plusSemitones(offset))
         else
             return [0, 2, 3, 5, 7, 8, 10].map(offset => this.degreeI().root().plusSemitones(offset))
     }
 
-    notesOn2Octaves(): Note[] {
-        return repeatOver2Octaves(this.notes());
+    notesOn2Octaves(): Chroma[] {
+        return repeatOver2Octaves(this.chromas());
     }
 
     containsAllChords(chords: Chord[]): boolean {
@@ -100,7 +100,7 @@ export class Chord {
         this.name = name;
     }
 
-    notes(): Note[] {
+    chromas(): Chroma[] {
         if (this.isDiminished())
             return [this.root(), this.root().flatThird(), this.root().flatFifth()];
         else if (this.isMinor())
@@ -115,7 +115,7 @@ export class Chord {
             rootName = this.name.slice(0, -3);
         else
             rootName = this.name.slice(0, -1);
-        return new Note(rootName);
+        return new Chroma(rootName);
     }
 
     isDiminished() {
@@ -130,22 +130,22 @@ export class Chord {
         return this.name.endsWith("M");
     }
 
-    containsAllNotes(notes: Note[]) {
-        return isNotEmpty(notes) && notes
-                .map(note => note.name)
-                .every(note => this.notes()
-                    .map(myNote => myNote.name)
-                    .includes(note));
+    containsAllChromas(chromas: Chroma[]) {
+        return isNotEmpty(chromas) && chromas
+                .map(chroma => chroma.name)
+                .every(chroma => this.chromas()
+                    .map(myChroma => myChroma.name)
+                    .includes(chroma));
     }
 
     notesOn2Octaves() {
-        return repeatOver2Octaves(this.notes());
+        return repeatOver2Octaves(this.chromas());
     }
 }
 
 const octave = ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"]
 
-export class Note {
+export class Chroma {
     readonly name: string;
 
     constructor(name: string) {
@@ -171,28 +171,28 @@ export class Note {
     plusSemitones(semitones: number) {
         const thisIndex = octave.indexOf(this.name);
         const resultIndex = (thisIndex + semitones) % octave.length;
-        return new Note(octave[resultIndex])
+        return new Chroma(octave[resultIndex])
     }
 
-    isLowerThanInOctave(other: Note): boolean {
+    isLowerThanInOctave(other: Chroma): boolean {
         return octave.indexOf(this.name) < octave.indexOf(other.name)
     }
 }
 
-function repeatOver2Octaves(notes: Note[]) {
+function repeatOver2Octaves(notes: Chroma[]) {
     const notesOn1Octave = sortInOctave(notes)
     return notesOn1Octave.concat(notesOn1Octave);
 }
 
-export function sortInOctave(notes: Note[]) {
+export function sortInOctave(notes: Chroma[]) {
     return notes.sort((a, b) => a.isLowerThanInOctave(b) ? -1 : 1)
 }
 
-export function scalesContaining(notes: Note[], chords: Chord[]) {
+export function scalesContaining(chromas: Chroma[], chords: Chord[]) {
     return scalesInFifthsOrder()
-        .filter(scale => (isNotEmpty(chords) || isNotEmpty(notes))
+        .filter(scale => (isNotEmpty(chords) || isNotEmpty(chromas))
             && (isFalsyOrEmpty(chords) || scale.containsAllChords(chords))
-            && (isFalsyOrEmpty(notes) || scale.chords().some(chord => chord.containsAllNotes(notes))));
+            && (isFalsyOrEmpty(chromas) || scale.chords().some(chord => chord.containsAllChromas(chromas))));
 }
 
 function distinct<T>(array: T[]): T[] {
@@ -206,11 +206,11 @@ function distinct<T>(array: T[]): T[] {
     return result;
 }
 
-export function chordsContaining(notes: Note[]) {
+export function chordsContaining(chromas: Chroma[]) {
     const allChords = distinct(scalesInFifthsOrder()
         .flatMap(scale => scale.chords()));
     return allChords
-        .filter(chord => chord.containsAllNotes(notes));
+        .filter(chord => chord.containsAllChromas(chromas));
 }
 
 function isFalsyOrEmpty<T>(items: T[]) {
